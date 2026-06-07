@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://b03fh2hf2r74d" path="res://scenes/Player_1.tscn" id="1_elqb8"]
 [ext_resource type="Script" uid="uid://dk43w7nwvq0r7" path="res://scripts/main.gd" id="1_rvslj"]
+[ext_resource type="PackedScene" uid="uid://cmxphmyhw0cgv" path="res://scenes/chunk_1.tscn" id="2_rarhs"]
 [ext_resource type="PackedScene" uid="uid://j1etn6qdep6" path="res://scenes/chunk_2.tscn" id="3_c01mt"]
 [ext_resource type="PackedScene" uid="uid://b17if56muo26m" path="res://scenes/safe_chunk.tscn" id="3_vcsgt"]
 [ext_resource type="PackedScene" uid="uid://buevcx4p2sfko" path="res://scenes/chunk_3.tscn" id="4_nxtc6"]
@@ -10,7 +11,7 @@
 
 [node name="Node2D" type="Node2D" unique_id=1314541290]
 script = ExtResource("1_rvslj")
-chunk_scenes = Array[PackedScene]([ExtResource("5_jlsqs"), ExtResource("3_c01mt"), ExtResource("4_nxtc6"), ExtResource("5_jlsqs")])
+chunk_scenes = Array[PackedScene]([ExtResource("2_rarhs"), ExtResource("3_c01mt"), ExtResource("4_nxtc6"), ExtResource("5_jlsqs")])
 start_chunk = ExtResource("3_vcsgt")
 
 [node name="GameCamera" type="Camera2D" parent="." unique_id=982389235]
@@ -23,3 +24,8 @@ position = Vector2(52, -38)
 position = Vector2(52, -38)
 
 [node name="Chunks" type="Node2D" parent="." unique_id=1445143187]
+
+[node name="DecayLine" type="Line2D" parent="." unique_id=43813036]
+points = PackedVector2Array(0, -10000, 0, 10000)
+width = 1000.0
+default_color = Color(0, 0, 0, 0.039215688)

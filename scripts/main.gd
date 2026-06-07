@@ -12,6 +12,7 @@ extends Node2D
 @onready var player1         := $player_1
 @onready var player2         := $player_2
 @onready var chunk_container := $Chunks
+@onready var decay_line := $DecayLine
 
 var decay_wall_x        := -200.0
 var tile_decay          := {}
@@ -67,6 +68,9 @@ func _process(delta):
 		_spawn_chunk()
 	_apply_decay_to_tiles()
 	_update_camera()
+	
+	# Update the visual line's X position to match your logic wall
+	decay_line.global_position.x = decay_wall_x - 1100
 
 func _spawn_specific_chunk(scene: PackedScene):
 	if scene == null:
