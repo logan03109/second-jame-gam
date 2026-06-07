@@ -9,9 +9,11 @@
 [ext_resource type="PackedScene" uid="uid://d1oj06hdu16jv" path="res://scenes/chunk_4.tscn" id="5_jlsqs"]
 [ext_resource type="PackedScene" uid="uid://doj1lafa43rle" path="res://scenes/Player_2.tscn" id="5_vcsgt"]
 [ext_resource type="PackedScene" uid="uid://c4w4djvera0lb" path="res://scenes/chunk_5.tscn" id="6_q8u5g"]
+[ext_resource type="Texture2D" uid="uid://dj3vtbyyryeuv" path="res://assets/background v4.png" id="10_lhr70"]
 
 [node name="Node2D" type="Node2D" unique_id=1314541290]
 script = ExtResource("1_rvslj")
+decay_speed = 210.0
 chunk_scenes = Array[PackedScene]([ExtResource("2_rarhs"), ExtResource("3_c01mt"), ExtResource("4_nxtc6"), ExtResource("5_jlsqs"), ExtResource("6_q8u5g")])
 start_chunk = ExtResource("3_vcsgt")
 
@@ -30,3 +32,15 @@ position = Vector2(52, -38)
 points = PackedVector2Array(0, -10000, 0, 10000)
 width = 1000.0
 default_color = Color(0, 0, 0, 0.039215688)
+
+[node name="Parallax2D" type="Parallax2D" parent="." unique_id=469574535]
+scroll_scale = Vector2(0.2, 0.2)
+scroll_offset = Vector2(66, -62)
+repeat_size = Vector2(832, 832)
+repeat_times = 50
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax2D" unique_id=2076385217]
+z_index = -10
+position = Vector2(27, -472)
+scale = Vector2(0.52, 0.52)
+texture = ExtResource("10_lhr70")
