@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://b17if56muo26m"]
+
+[ext_resource type="Texture2D" uid="uid://bujd5gs24k1tu" path="res://assets/gd block second.png" id="1_yh5b6"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6gysl"]
+texture = ExtResource("1_yh5b6")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="TileSet" id="TileSet_2o0pu"]
+physics_layer_0/collision_layer = 3
+physics_layer_0/collision_mask = 3
+sources/0 = SubResource("TileSetAtlasSource_6gysl")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fxsv8"]
+size = Vector2(6, 112)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mx0tw"]
+size = Vector2(3, 114)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_smtmw"]
+size = Vector2(3, 111)
+
+[node name="SafeChunk" type="Node2D" unique_id=1808296853]
+
+[node name="TileMap" type="TileMap" parent="." unique_id=1720461970]
+tile_set = SubResource("TileSet_2o0pu")
+format = 2
+layer_0/tile_data = PackedInt32Array(0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 6, 0, 0, 7, 0, 0, 8, 0, 0, 9, 0, 0)
+
+[node name="SpawnPoint" type="Marker2D" parent="." unique_id=1103265325]
+
+[node name="EndPoint" type="Marker2D" parent="." unique_id=143668022]
+position = Vector2(160, 0)
+
+[node name="DecayOff" type="Area2D" parent="." unique_id=2122428881]
+collision_layer = 0
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DecayOff" unique_id=1270229655]
+position = Vector2(3, -40)
+shape = SubResource("RectangleShape2D_fxsv8")
+
+[node name="DecayOn" type="Area2D" parent="." unique_id=416835635]
+collision_layer = 0
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DecayOn" unique_id=739467726]
+position = Vector2(158.5, -41)
+shape = SubResource("RectangleShape2D_mx0tw")
+
+[node name="checkpoint" type="Area2D" parent="." unique_id=1976306965]
+collision_layer = 0
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="checkpoint" unique_id=1007107593]
+position = Vector2(157.5, -40.5)
+shape = SubResource("RectangleShape2D_smtmw")
