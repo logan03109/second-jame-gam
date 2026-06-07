@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://c4w4djvera0lb"]
+
+[ext_resource type="Texture2D" uid="uid://b8ei0qxkov3pa" path="res://assets/Screenshot 2026-06-04 113736.png" id="1_pmgtx"]
+[ext_resource type="Texture2D" uid="uid://bujd5gs24k1tu" path="res://assets/gd block second.png" id="2_edwfw"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0dxg6"]
+texture = ExtResource("1_pmgtx")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gsspq"]
+texture = ExtResource("2_edwfw")
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_lvfo5"]
+physics_layer_0/collision_layer = 3
+physics_layer_0/collision_mask = 3
+sources/0 = SubResource("TileSetAtlasSource_0dxg6")
+sources/1 = SubResource("TileSetAtlasSource_gsspq")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lx8el"]
+size = Vector2(3, 120.5)
+
+[node name="Chunk1" type="Node2D" unique_id=1976061801]
+
+[node name="TileMap" type="TileMap" parent="." unique_id=1417962687]
+tile_set = SubResource("TileSet_lvfo5")
+format = 2
+layer_0/tile_data = PackedInt32Array(-65479, 0, 0, -65478, 0, 0, -65477, 0, 0, -65476, 0, 0, -65475, 0, 0, -65474, 0, 0, -65473, 0, 0, -65472, 0, 0, -65471, 0, 0, -131006, 0, 0, -131005, 0, 0, -131004, 0, 0, -131003, 0, 0, -131002, 0, 0, -65466, 0, 0, -65465, 0, 0, -65464, 0, 0, -65536, 1, 0, -65535, 0, 0, -65534, 0, 0, -65533, 0, 0, -65532, 0, 0, -65531, 0, 0, -65530, 0, 0, -131066, 0, 0, -131065, 0, 0, -65529, 0, 0, -65528, 0, 0, -65527, 0, 0, -65526, 0, 0, -65523, 0, 0, -65522, 0, 0, -65521, 0, 0, -131056, 0, 0, -65520, 0, 0, -65519, 0, 0, -131055, 0, 0, -131054, 0, 0, -65518, 0, 0, -131053, 0, 0, -65517, 0, 0, -131052, 0, 0, -196588, 0, 0, -196589, 0, 0, -196587, 0, 0, -131051, 0, 0, -131050, 0, 0, -196585, 0, 0, -196586, 0, 0, -196584, 0, 0, -196583, 0, 0, -131047, 0, 0, -131046, 0, 0, -131045, 0, 0, -131044, 0, 0, -131041, 0, 0, -65504, 0, 0, -65503, 0, 0, 33, 0, 0, 34, 0, 0, 65570, 0, 0, 131107, 0, 0, 65571, 0, 0, 65572, 0, 0, 36, 0, 0, -65499, 0, 0, -131034, 0, 0, -196569, 0, 0, -131033, 0, 0, 196650, 0, 0, 196651, 0, 0, 196652, 0, 0, 196654, 0, 0, 196656, 0, 0, 196653, 0, 0, 196655, 0, 0, 196657, 0, 0, 196658, 0, 0, 65587, 0, 0, 131122, 0, 0, 65588, 0, 0, 65589, 0, 0, 65590, 0, 0, 54, 0, 0, -65481, 0, 0, -65480, 0, 0, -262105, 0, 0, -196570, 0, 0, -327641, 0, 0, -327640, 0, 0)
+
+[node name="SpawnPoint" type="Marker2D" parent="." unique_id=1105596745]
+position = Vector2(0, -16)
+
+[node name="EndPoint" type="Marker2D" parent="." unique_id=693103743]
+position = Vector2(1168, -16)
+
+[node name="checkpoint" type="Area2D" parent="." unique_id=1953299083]
+position = Vector2(1129, -35)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="checkpoint" unique_id=636877861]
+position = Vector2(35.5, -17.25)
+shape = SubResource("RectangleShape2D_lx8el")
