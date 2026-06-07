@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://tphlffme3lh6"
-path="res://.godot/imported/character 1 - standing.png-ccc07ac85aac439a4d97b39edbe93427.ctex"
+uid="uid://ci0vubrwyojin"
+path="res://.godot/imported/grass stone tile.png-449bf3d891f02eb06d4b8cc78571bac3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/character 1 - standing.png"
-dest_files=["res://.godot/imported/character 1 - standing.png-ccc07ac85aac439a4d97b39edbe93427.ctex"]
+source_file="res://assets/grass stone tile.png"
+dest_files=["res://.godot/imported/grass stone tile.png-449bf3d891f02eb06d4b8cc78571bac3.ctex"]
 
 [params]
 
