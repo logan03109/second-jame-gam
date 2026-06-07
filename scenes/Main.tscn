@@ -5,11 +5,12 @@
 [ext_resource type="PackedScene" uid="uid://cmxphmyhw0cgv" path="res://scenes/chunk_1.tscn" id="2_rarhs"]
 [ext_resource type="PackedScene" uid="uid://j1etn6qdep6" path="res://scenes/chunk_2.tscn" id="3_c01mt"]
 [ext_resource type="PackedScene" uid="uid://b17if56muo26m" path="res://scenes/safe_chunk.tscn" id="3_vcsgt"]
+[ext_resource type="PackedScene" uid="uid://buevcx4p2sfko" path="res://scenes/chunk_3.tscn" id="4_nxtc6"]
 [ext_resource type="PackedScene" uid="uid://doj1lafa43rle" path="res://scenes/Player_2.tscn" id="5_vcsgt"]
 
 [node name="Node2D" type="Node2D" unique_id=1314541290]
 script = ExtResource("1_rvslj")
-chunk_scenes = Array[PackedScene]([ExtResource("2_rarhs"), ExtResource("3_c01mt")])
+chunk_scenes = Array[PackedScene]([ExtResource("2_rarhs"), ExtResource("3_c01mt"), ExtResource("4_nxtc6")])
 start_chunk = ExtResource("3_vcsgt")
 
 [node name="GameCamera" type="Camera2D" parent="." unique_id=982389235]

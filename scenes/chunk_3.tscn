@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://buevcx4p2sfko"]
+
+[ext_resource type="Texture2D" uid="uid://b8ei0qxkov3pa" path="res://assets/Screenshot 2026-06-04 113736.png" id="1_5bqgg"]
+[ext_resource type="Texture2D" uid="uid://bujd5gs24k1tu" path="res://assets/gd block second.png" id="2_oyhqx"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_x4ksq"]
+texture = ExtResource("1_5bqgg")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tlfix"]
+texture = ExtResource("2_oyhqx")
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_h4vka"]
+physics_layer_0/collision_layer = 3
+physics_layer_0/collision_mask = 3
+sources/0 = SubResource("TileSetAtlasSource_x4ksq")
+sources/1 = SubResource("TileSetAtlasSource_tlfix")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lvdxy"]
+size = Vector2(3, 120.5)
+
+[node name="Chunk" type="Node2D" unique_id=1161737643]
+
+[node name="TileMap" type="TileMap" parent="." unique_id=1182193466]
+tile_set = SubResource("TileSet_h4vka")
+format = 2
+layer_0/tile_data = PackedInt32Array(-65481, 0, 0, -65480, 0, 0, -65479, 0, 0, -65477, 0, 0, -65476, 0, 0, -65475, 0, 0, -65473, 0, 0, -65472, 0, 0, -65471, 0, 0, -131006, 0, 0, -131004, 0, 0, -131003, 0, 0, -131002, 0, 0, -65466, 0, 0, -65465, 0, 0, -65464, 0, 0, -65536, 1, 0, -65535, 0, 0, -131067, 0, 0, -131066, 0, 0, 9, 0, 0, 10, 0, 0, 11, 0, 0, -65522, 0, 0, -65521, 0, 0, -65520, 0, 0, -327669, 0, 0, -327668, 0, 0, -196589, 0, 0, -196588, 0, 0, -196587, 0, 0, -65512, 0, 0, -65511, 0, 0, -65510, 0, 0, -65509, 0, 0, 65566, 0, 0, 65567, 0, 0, 65568, 0, 0, 33, 0, 0, 34, 0, 0, -65498, 0, 0, -65497, 0, 0, 65579, 0, 0, 65580, 0, 0, -65488, 0, 0, -65487, 0, 0)
+
+[node name="SpawnPoint" type="Marker2D" parent="." unique_id=2087327834]
+position = Vector2(0, -16)
+
+[node name="EndPoint" type="Marker2D" parent="." unique_id=57813125]
+position = Vector2(1168, -16)
+
+[node name="checkpoint" type="Area2D" parent="." unique_id=198331082]
+position = Vector2(1130, -42)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="checkpoint" unique_id=1222296339]
+position = Vector2(35.5, -17.25)
+shape = SubResource("RectangleShape2D_lvdxy")
