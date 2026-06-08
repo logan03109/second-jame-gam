@@ -3,6 +3,7 @@ extends Node2D
 @export var min_zoom           := 1.0
 @export var max_zoom           := 4.0
 @export var zoom_margin        := 200.0
+@export var decay_start_offset := 400
 @export var join_action        := "p2_join"
 @export var chunk_scenes: Array[PackedScene] = []
 @export var start_chunk: PackedScene
@@ -139,7 +140,9 @@ func _on_chunk_decay_on(body, area):
 	if (body == player1 or (p2_joined and body == player2)) and not triggered_decay_on.get(area, false):
 		triggered_decay_on[area] = true
 		decay_active = true
-		decay_wall_x = _get_living_player_x() - 200.0
+		print("player x:",_get_living_player_x())
+		print("Decay x:", _get_living_player_x() + decay_start_offset)
+		decay_wall_x = _get_living_player_x() + decay_start_offset
 var next_chunk_to_trigger := 1
 
 func _check_chunks():
