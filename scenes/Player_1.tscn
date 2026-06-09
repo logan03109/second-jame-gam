@@ -1,17 +1,53 @@
 [gd_scene format=3 uid="uid://b03fh2hf2r74d"]
 
 [ext_resource type="Script" uid="uid://dmi6sonqyku02" path="res://scripts/player_1.gd" id="1_p0vlq"]
-[ext_resource type="Texture2D" uid="uid://ddln83stjyssf" path="res://assets/icon.svg" id="2_v6fml"]
+[ext_resource type="Texture2D" uid="uid://blvtklug7alen" path="res://assets/character 1- standing v3.png" id="2_byfrp"]
+[ext_resource type="Texture2D" uid="uid://b0h70iypu18ql" path="res://assets/character 1 frame 1.png" id="3_tv582"]
+[ext_resource type="Texture2D" uid="uid://um55k2jhcjbx" path="res://assets/character 1 frame 2.png" id="4_hiwc3"]
+[ext_resource type="Texture2D" uid="uid://db5kl81n0o60e" path="res://assets/character 1 frame 3.png" id="5_q737x"]
+[ext_resource type="Texture2D" uid="uid://dc5yoqremo2et" path="res://assets/character 1 frame 4.png" id="6_s0g1m"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3li8b"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xmx1o"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_byfrp")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_tv582")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_hiwc3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_q737x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_q737x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_s0g1m")
+}],
+"loop": true,
+"name": &"run",
+"speed": 20.0
+}]
 
 [node name="player_1" type="CharacterBody2D" unique_id=479724984]
 script = ExtResource("1_p0vlq")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=674797557]
-position = Vector2(1.9073486e-06, -1.9073486e-06)
-scale = Vector2(0.15625, 0.15625)
-texture = ExtResource("2_v6fml")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=340616201]
 shape = SubResource("RectangleShape2D_3li8b")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=202130230]
+position = Vector2(0, -4)
+scale = Vector2(1, 0.953)
+sprite_frames = SubResource("SpriteFrames_xmx1o")
+animation = &"idle"

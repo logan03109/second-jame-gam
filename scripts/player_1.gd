@@ -5,6 +5,7 @@ extends CharacterBody2D
 @export var jump_action := "p1_jump"
 @export var down_action := "p1_down"
 @export var dash_action := "p1_dash"
+@onready var anim = $AnimatedSprite2D
 
 const SPEED = 200.0
 const JUMP_VELOCITY = -300.0
@@ -69,17 +70,21 @@ func _physics_process(delta):
 		dash_direction = dir if dir != 0.0 else dash_direction
 
 	var direction := Input.get_axis(left_action, right_action)
-	
+
 	if direction and not is_on_floor():
 		velocity.x = move_toward(velocity.x, direction * SPEED, INIT_ACCEL * delta)
+		anim.play("run")
+		anim.flip_h = direction < 0
 	elif direction:
 		velocity.x += 50
 		velocity.x = move_toward(velocity.x, direction * SPEED, INIT_ACCEL * delta)
-		#velocity.x = direction * SPEED
+		anim.play("run")
+		anim.flip_h = direction < 0
 	elif not is_on_floor():
 		velocity.x = move_toward(velocity.x, 0, AIR_RESISTANCE * delta)
-		pass
+		anim.play("idle")  # or "jump" if you have one
 	else:
 		velocity.x = move_toward(velocity.x, 0, FRICTION * delta)
+		anim.play("idle")
 
 	move_and_slide()
