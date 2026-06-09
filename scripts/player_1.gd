@@ -9,8 +9,8 @@ extends CharacterBody2D
 
 @onready var anim = $AnimatedSprite2D
 
-const SPEED = 200.0
-const JUMP_VELOCITY = -300.0
+var SPEED = 200.0
+var JUMP_VELOCITY = -300.0
 const DOWN_VELOCITY = -400.0
 const INIT_ACCEL = 4500.0
 const FRICTION = 2500.0
@@ -158,3 +158,14 @@ func _physics_process(delta):
 			anim.play("idle")
 
 	move_and_slide()
+
+func apply_effect(buff: String, duration: float):
+	match buff:
+		"speed":
+			SPEED *= 1.2
+			if SPEED > 1000:
+				SPEED = 1000
+		"jump":
+			JUMP_VELOCITY *= 1.1
+			if JUMP_VELOCITY < -1200:
+				JUMP_VELOCITY = -1200
