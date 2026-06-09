@@ -8,7 +8,7 @@ extends Node2D
 @export var chunk_scenes: Array[PackedScene] = []
 @export var start_chunk: PackedScene
 @export var safe_chunk_interval := 1
-@export var safe_chunk_time := 5.0
+@export var safe_chunk_time := 2.0
 
 @onready var timer_label := $CanvasLayer/TimerLabel
 @onready var camera          := $GameCamera
@@ -47,6 +47,15 @@ func _ready():
 		if spawn:
 			player1.global_position = active_chunks[0].global_position + spawn.position - Vector2(0, 32)
 			player2.global_position = player1.global_position + Vector2(50, 0)
+			
+	#timerlabel
+	var settings = LabelSettings.new()
+	
+	settings.font_size = 25
+	settings.font_color = Color(255, 255, 255, 0.8)
+	
+	timer_label.label_settings = settings
+
 
 func _process(delta):
 	if not p2_joined and Input.is_action_just_pressed(join_action):
@@ -89,6 +98,7 @@ func _process(delta):
 			in_safe_chunk = false
 			decay_active = true
 			timer_label.visible = false
+			safe_timer = -1
 
 			# Start decay from current player position
 			decay_wall_x = _get_living_player_x() + decay_start_offset
@@ -166,7 +176,7 @@ func _on_chunk_decay_off(body, area):
 
 			if timer_label:
 				timer_label.visible = true
-				timer_label.text = "Decay resumes in: %d" % int(ceil(safe_timer))
+				timer_label.text = "Decay resumes in: %1d" % int(ceil(safe_timer))
 
 		_respawn_dead_players()
 
