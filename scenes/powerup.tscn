@@ -1,16 +1,19 @@
 [gd_scene format=3 uid="uid://cblexkiyh53a1"]
 
-[ext_resource type="Script" uid="uid://b1eok0iu5qgxr" path="res://scripts/scene_scripts/powerup.gd" id="1_ih772"]
-[ext_resource type="PackedScene" uid="uid://de6x5fpq6jn5i" path="res://scenes/sprite_2d.tscn" id="2_406cw"]
+[ext_resource type="Script" uid="uid://cb22qxfug4khb" path="res://scripts/powerup.gd" id="1_ih772"]
+[ext_resource type="Texture2D" uid="uid://njurry7dmfya" path="res://assets/Screenshot 2026-06-02 082823.png" id="2_406cw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qmy6f"]
 
 [node name="Powerup" type="Area2D" unique_id=1982663780]
 script = ExtResource("1_ih772")
 
-[node name="Sprite2D" parent="." unique_id=1774191271 instance=ExtResource("2_406cw")]
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=959730266]
 shape = SubResource("RectangleShape2D_qmy6f")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1555853559]
+position = Vector2(-1.847744e-06, -8.34465e-07)
+scale = Vector2(0.12422358, 0.124223605)
+texture = ExtResource("2_406cw")
 
 [connection signal="body_shape_entered" from="." to="." method="_on_body_shape_entered"]

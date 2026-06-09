@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://c4w4djvera0lb" path="res://scenes/chunk_5.tscn" id="6_q8u5g"]
 [ext_resource type="PackedScene" uid="uid://t60pgi0w1ghl" path="res://scenes/GDLTchunk.tscn" id="7_wp0k4"]
 [ext_resource type="Texture2D" uid="uid://dj3vtbyyryeuv" path="res://assets/background v4.png" id="10_lhr70"]
-[ext_resource type="Script" uid="uid://b5mhqgqismcv3" path="res://scripts/power_up.gd" id="12_qmy6f"]
+[ext_resource type="Script" uid="uid://cb22qxfug4khb" path="res://scripts/powerup.gd" id="12_qmy6f"]
 [ext_resource type="Texture2D" uid="uid://njurry7dmfya" path="res://assets/Screenshot 2026-06-02 082823.png" id="13_mwfav"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3p2gp"]
@@ -19,15 +19,9 @@
 [node name="Node2D" type="Node2D" unique_id=1314541290]
 script = ExtResource("1_rvslj")
 decay_speed = 210.0
-min_zoom = null
 max_zoom = 3.0
-zoom_margin = null
-decay_start_offset = null
-join_action = null
 chunk_scenes = Array[PackedScene]([ExtResource("2_rarhs"), ExtResource("3_c01mt"), ExtResource("4_nxtc6"), ExtResource("5_jlsqs"), ExtResource("6_q8u5g"), ExtResource("7_wp0k4")])
 start_chunk = ExtResource("3_vcsgt")
-safe_chunk_interval = null
-safe_chunk_time = null
 
 [node name="GameCamera" type="Camera2D" parent="." unique_id=982389235]
 position_smoothing_enabled = true
