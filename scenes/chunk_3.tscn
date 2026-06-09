@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://cxe0op2b7qs53" path="res://scripts/scene_scripts/chunk_3.gd" id="1_jnfqe"]
 [ext_resource type="Texture2D" uid="uid://rw003wb3l6jy" path="res://assets/stone tile dark.png" id="1_sng7j"]
 [ext_resource type="Texture2D" uid="uid://ci0vubrwyojin" path="res://assets/grass stone tile.png" id="2_jnfqe"]
+[ext_resource type="Script" uid="uid://57xbua6agell" path="res://scripts/area_2d.gd" id="4_4k65o"]
+[ext_resource type="Texture2D" uid="uid://b8ei0qxkov3pa" path="res://assets/Screenshot 2026-06-04 113736.png" id="5_4cbmi"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_sng7j"]
 texture = ExtResource("1_sng7j")
@@ -21,6 +23,9 @@ sources/1 = SubResource("TileSetAtlasSource_jnfqe")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lvdxy"]
 size = Vector2(3, 120.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_47xwu"]
+size = Vector2(46, 47)
 
 [node name="Chunk" type="Node2D" unique_id=1161737643]
 script = ExtResource("1_jnfqe")
@@ -42,3 +47,26 @@ position = Vector2(1130, -42)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="checkpoint" unique_id=1222296339]
 position = Vector2(35.5, -17.25)
 shape = SubResource("RectangleShape2D_lvdxy")
+
+[node name="PowerupSpawn" type="Area2D" parent="." unique_id=1442124687]
+position = Vector2(412, -35)
+
+[node name="PowerupSpawn2" type="Area2D" parent="." unique_id=1040883746]
+position = Vector2(707, -74)
+
+[node name="portal" type="Area2D" parent="." unique_id=1899820361]
+position = Vector2(376, -155)
+collision_layer = 19
+collision_mask = 3
+script = ExtResource("4_4k65o")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="portal" unique_id=611298017]
+position = Vector2(-1, 4)
+shape = SubResource("RectangleShape2D_47xwu")
+
+[node name="Sprite2D" type="Sprite2D" parent="portal" unique_id=91531832]
+position = Vector2(-1.0000067, 3.0000024)
+scale = Vector2(2.875001, 2.8749998)
+texture = ExtResource("5_4cbmi")
+
+[connection signal="body_entered" from="portal" to="." method="_on_area_2d_body_entered"]

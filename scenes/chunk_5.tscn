@@ -56,3 +56,9 @@ position = Vector2(1129, -35)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="checkpoint" unique_id=636877861]
 position = Vector2(35.5, -17.25)
 shape = SubResource("RectangleShape2D_lx8el")
+
+[node name="PowerupSpawn" type="Area2D" parent="." unique_id=1824775380]
+position = Vector2(578, -21)
+
+[node name="PowerupSpawn2" type="Area2D" parent="." unique_id=164117719]
+position = Vector2(698, -137)

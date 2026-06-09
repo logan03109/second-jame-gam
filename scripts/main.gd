@@ -11,6 +11,7 @@ extends Node2D
 @export var start_chunk: PackedScene
 @export var safe_chunk_interval := 1
 @export var safe_chunk_time := 2.0
+@export var powerup_spawn_chance := 0.2
 
 @onready var timer_label := $CanvasLayer/TimerLabel
 @onready var camera          := $GameCamera
@@ -156,8 +157,7 @@ func _spawn_chunk():
 	active_chunks.append(chunk)
 	_connect_chunk_signals(chunk)
 	_add_chunk_cells(chunk)
-	var powerup_coords: Vector2 = Vector2(next_chunk_x, 0)
-	_spawn_powerup_in_chunk(powerup_coords)
+	_spawn_powerups_in_chunk(chunk)  # changed
 
 func _add_chunk_cells(chunk: Node2D):
 	var chunk_tilemap = chunk.get_node_or_null("TileMap")
@@ -352,11 +352,13 @@ func _extend_safe_time(chunk: Node2D):
 		safe_chunk_time += 3.0 
 	return safe_chunk_time
 	
-func _spawn_powerup_in_chunk(coords):
-	var powerup_inst = powerup_scene.instantiate()
-	add_child(powerup_inst)
-	powerup_inst.set_position(coords)
-	print("Spawned at ", coords)
+func _spawn_powerups_in_chunk(chunk: Node2D):
+	for child in chunk.get_children():
+		if child.name.begins_with("PowerupSpawn"):
+			if randf() < powerup_spawn_chance:
+				var powerup_inst = powerup_scene.instantiate()
+				add_child(powerup_inst)
+				powerup_inst.global_position = child.global_position
 
 func _on_power_up_body_entered(body: Node2D) -> void:
 	pass # Replace with function body.
