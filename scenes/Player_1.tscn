@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dmi6sonqyku02" path="res://scripts/player_1.gd" id="1_p0vlq"]
 [ext_resource type="Texture2D" uid="uid://blvtklug7alen" path="res://assets/character 1- standing v3.png" id="2_byfrp"]
+[ext_resource type="Texture2D" uid="uid://bdsin7i04u1i3" path="res://assets/character 1 jump.png" id="3_hiwc3"]
 [ext_resource type="Texture2D" uid="uid://b0h70iypu18ql" path="res://assets/character 1 frame 1.png" id="3_tv582"]
 [ext_resource type="Texture2D" uid="uid://um55k2jhcjbx" path="res://assets/character 1 frame 2.png" id="4_hiwc3"]
 [ext_resource type="Texture2D" uid="uid://db5kl81n0o60e" path="res://assets/character 1 frame 3.png" id="5_q737x"]
@@ -22,7 +23,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("4_hiwc3")
+"texture": ExtResource("3_hiwc3")
 }],
 "loop": true,
 "name": &"jump",
@@ -60,4 +61,4 @@ shape = SubResource("RectangleShape2D_3li8b")
 position = Vector2(0, -4)
 scale = Vector2(1, 0.953)
 sprite_frames = SubResource("SpriteFrames_xmx1o")
-animation = &"run"
+animation = &"jump"

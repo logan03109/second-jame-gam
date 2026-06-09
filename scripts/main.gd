@@ -35,6 +35,7 @@ var first_safe_chunk := true
 var current_chunk: Node2D = null
 
 func _ready():
+	print("test with logan for git")
 	add_to_group("main")
 	camera.zoom = Vector2(3.0, 3.0)
 	player2.visible = false
