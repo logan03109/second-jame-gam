@@ -97,8 +97,11 @@ func _physics_process(delta):
 
 		if axis_x != 0:
 			dir = sign(axis_x)
-
-		dash_direction = dir if dir != 0 else dash_direction
+	
+		if dir != 0:
+			dash_direction = dir  
+		else:
+			dash_direction
 
 	if is_dashing:
 		velocity.x = dash_direction * DASH_SPEED
