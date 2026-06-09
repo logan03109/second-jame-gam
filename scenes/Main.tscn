@@ -19,15 +19,9 @@
 [node name="Node2D" type="Node2D" unique_id=1314541290]
 script = ExtResource("1_rvslj")
 decay_speed = 210.0
-min_zoom = null
 max_zoom = 3.0
-zoom_margin = null
-decay_start_offset = null
-join_action = null
 chunk_scenes = Array[PackedScene]([ExtResource("2_rarhs"), ExtResource("3_c01mt"), ExtResource("4_nxtc6"), ExtResource("5_jlsqs"), ExtResource("6_q8u5g"), ExtResource("7_wp0k4")])
 start_chunk = ExtResource("3_vcsgt")
-safe_chunk_interval = null
-safe_chunk_time = null
 
 [node name="GameCamera" type="Camera2D" parent="." unique_id=982389235]
 position_smoothing_enabled = true
