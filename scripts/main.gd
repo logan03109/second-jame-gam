@@ -35,6 +35,7 @@ var first_safe_chunk := true
 var current_chunk: Node2D = null
 
 func _ready():
+	print(Input.get_connected_joypads())
 	print("test with logan for git")
 	add_to_group("main")
 	camera.zoom = Vector2(3.0, 3.0)
@@ -91,7 +92,6 @@ func _process(delta):
 	decay_line.global_position.x = decay_wall_x - 1100
 	
 	if in_safe_chunk:
-		print("in safe chunk")
 		safe_timer -= delta
 
 		timer_label.text = "Decay resumes in: %.1f" % safe_timer
