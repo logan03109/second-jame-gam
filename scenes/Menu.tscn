@@ -1,0 +1,74 @@
+[gd_scene format=3 uid="uid://bcnfwb6d51i8o"]
+
+[ext_resource type="Script" uid="uid://cbtw6acipfaon" path="res://scenes/Menu.gd" id="1_xdvgc"]
+[ext_resource type="Texture2D" uid="uid://dj3vtbyyryeuv" path="res://assets/background v4.png" id="2_upctu"]
+[ext_resource type="FontFile" uid="uid://2jqagbx16b1s" path="res://assets/cour.ttf" id="3_11y2r"]
+
+[node name="Menu" type="Control" unique_id=1671117714]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 61.0
+offset_top = -2.0
+offset_right = 61.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xdvgc")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1463702829]
+z_index = -20
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -320.0
+offset_top = -1.0
+offset_bottom = 879.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_upctu")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TextureRect" unique_id=1862116378]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -29.0
+offset_top = 7.0
+offset_right = 190.0
+offset_bottom = 52.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 100
+
+[node name="Title" type="Label" parent="TextureRect/VBoxContainer" unique_id=122674207]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_11y2r")
+theme_override_font_sizes/font_size = 90
+text = "
+THE GAME"
+horizontal_alignment = 1
+
+[node name="HighScoreLabel" type="Label" parent="TextureRect/VBoxContainer" unique_id=769835314]
+layout_mode = 2
+theme_override_constants/outline_size = 0
+theme_override_constants/shadow_outline_size = 5
+theme_override_fonts/font = ExtResource("3_11y2r")
+theme_override_font_sizes/font_size = 27
+text = "Press L in game for second player"
+horizontal_alignment = 1
+
+[node name="PlayButton" type="Button" parent="TextureRect/VBoxContainer" unique_id=1474529794]
+z_index = 3
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_11y2r")
+theme_override_font_sizes/font_size = 40
+text = "PLAY"
+
+[connection signal="pressed" from="TextureRect/VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]

@@ -1,44 +1,53 @@
 [gd_scene format=3 uid="uid://cmxphmyhw0cgv"]
 
-[ext_resource type="Script" uid="uid://cl705qoipodxj" path="res://scripts/scene_scripts/chunk_1.gd" id="1_ch8ff"]
-[ext_resource type="Texture2D" uid="uid://dteirguo5crgd" path="res://assets/stone tile.png" id="1_lx8el"]
-[ext_resource type="Texture2D" uid="uid://ci0vubrwyojin" path="res://assets/grass stone tile.png" id="2_ch8ff"]
+[ext_resource type="Script" uid="uid://dk43w7nwvq0r7" path="res://scripts/main.gd" id="1_k2g5r"]
+[ext_resource type="PackedScene" uid="uid://j1etn6qdep6" path="res://scenes/chunk_2.tscn" id="2_2gqgu"]
+[ext_resource type="PackedScene" uid="uid://buevcx4p2sfko" path="res://scenes/chunk_3.tscn" id="3_mifue"]
+[ext_resource type="PackedScene" uid="uid://d1oj06hdu16jv" path="res://scenes/chunk_4.tscn" id="4_t8a5g"]
+[ext_resource type="PackedScene" uid="uid://c4w4djvera0lb" path="res://scenes/chunk_5.tscn" id="5_or238"]
+[ext_resource type="PackedScene" uid="uid://t60pgi0w1ghl" path="res://scenes/GDLTchunk.tscn" id="6_4d5p1"]
+[ext_resource type="PackedScene" uid="uid://b17if56muo26m" path="res://scenes/safe_chunk.tscn" id="7_8ake4"]
+[ext_resource type="PackedScene" uid="uid://doj1lafa43rle" path="res://scenes/Player_2.tscn" id="8_edyad"]
+[ext_resource type="PackedScene" uid="uid://b03fh2hf2r74d" path="res://scenes/Player_1.tscn" id="9_xjm2m"]
+[ext_resource type="Texture2D" uid="uid://dj3vtbyyryeuv" path="res://assets/background v4.png" id="10_0ovmr"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0dxg6"]
-texture = ExtResource("1_lx8el")
-0:0/0 = 0
-0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+[node name="Node2D" type="Node2D" unique_id=1314541290]
+script = ExtResource("1_k2g5r")
+decay_speed = 210.0
+max_zoom = 3.0
+chunk_scenes = Array[PackedScene]([null, ExtResource("2_2gqgu"), ExtResource("3_mifue"), ExtResource("4_t8a5g"), ExtResource("5_or238"), ExtResource("6_4d5p1")])
+start_chunk = ExtResource("7_8ake4")
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gsspq"]
-texture = ExtResource("2_ch8ff")
-0:0/0 = 0
+[node name="GameCamera" type="Camera2D" parent="." unique_id=982389235]
+position_smoothing_enabled = true
 
-[sub_resource type="TileSet" id="TileSet_lvfo5"]
-physics_layer_0/collision_layer = 3
-physics_layer_0/collision_mask = 3
-sources/0 = SubResource("TileSetAtlasSource_0dxg6")
-sources/1 = SubResource("TileSetAtlasSource_gsspq")
+[node name="player_2" parent="." unique_id=1498718386 instance=ExtResource("8_edyad")]
+position = Vector2(52, -38)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_lx8el"]
-size = Vector2(3, 120.5)
+[node name="player_1" parent="." unique_id=479724984 instance=ExtResource("9_xjm2m")]
+position = Vector2(52, -38)
 
-[node name="Chunk1" type="Node2D" unique_id=1976061801]
-script = ExtResource("1_ch8ff")
+[node name="Chunks" type="Node2D" parent="." unique_id=1445143187]
 
-[node name="TileMap" type="TileMap" parent="." unique_id=1417962687]
-tile_set = SubResource("TileSet_lvfo5")
-format = 2
-layer_0/tile_data = PackedInt32Array(-65533, 0, 0, -65532, 0, 0, -65531, 0, 0, -65530, 0, 0, -65529, 0, 0, -65528, 0, 0, -65527, 0, 0, -65526, 0, 0, -65525, 0, 0, -65524, 0, 0, -65523, 0, 0, -65522, 0, 0, -65521, 0, 0, -65520, 0, 0, -65519, 0, 0, -65518, 0, 0, -65517, 0, 0, -65516, 0, 0, -65515, 0, 0, -65514, 0, 0, -65513, 0, 0, -65512, 0, 0, -65511, 0, 0, -131047, 0, 0, -131046, 0, 0, -131045, 0, 0, -131044, 0, 0, -131043, 0, 0, -131042, 0, 0, -131041, 0, 0, -131040, 0, 0, -131039, 0, 0, -131038, 0, 0, -65502, 0, 0, -65501, 0, 0, -65500, 0, 0, -65499, 0, 0, -65498, 0, 0, -65497, 0, 0, -65496, 0, 0, -65495, 0, 0, -65494, 0, 0, -65493, 0, 0, -65492, 0, 0, -65491, 0, 0, -65490, 0, 0, -65489, 0, 0, -65488, 0, 0, -65487, 0, 0, -65486, 0, 0, -65485, 0, 0, -65484, 0, 0, -65483, 0, 0, -65482, 0, 0, -65481, 0, 0, -65480, 0, 0, -65479, 0, 0, -65478, 0, 0, -65477, 0, 0, -65476, 0, 0, -65475, 0, 0, -65474, 0, 0, -65473, 0, 0, -65472, 0, 0, -65471, 0, 0, -131006, 0, 0, -131005, 0, 0, -131004, 0, 0, -131003, 0, 0, -131002, 0, 0, -65466, 0, 0, -65465, 0, 0, -65464, 0, 0, -65534, 0, 0, -65535, 0, 0, -65536, 1, 0)
+[node name="DecayLine" type="Line2D" parent="." unique_id=43813036]
+points = PackedVector2Array(0, -10000, 0, 10000)
+width = 1000.0
+default_color = Color(0, 0, 0, 0.078431375)
 
-[node name="SpawnPoint" type="Marker2D" parent="." unique_id=1105596745]
-position = Vector2(0, -16)
+[node name="Parallax2D" type="Parallax2D" parent="." unique_id=469574535]
+scroll_scale = Vector2(0.2, 0.2)
+scroll_offset = Vector2(66, -62)
+repeat_size = Vector2(832, 832)
+repeat_times = 50
 
-[node name="EndPoint" type="Marker2D" parent="." unique_id=693103743]
-position = Vector2(1168, -16)
+[node name="Sprite2D" type="Sprite2D" parent="Parallax2D" unique_id=2076385217]
+z_index = -10
+position = Vector2(27, -472)
+scale = Vector2(0.52, 0.52)
+texture = ExtResource("10_0ovmr")
 
-[node name="checkpoint" type="Area2D" parent="." unique_id=1953299083]
-position = Vector2(1130, -42)
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=863344744]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="checkpoint" unique_id=636877861]
-position = Vector2(35.5, -17.25)
-shape = SubResource("RectangleShape2D_lx8el")
+[node name="TimerLabel" type="Label" parent="CanvasLayer" unique_id=961418659]
+offset_right = 40.0
+offset_bottom = 23.0

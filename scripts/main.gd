@@ -35,10 +35,13 @@ var safe_timer := 0.0
 var in_safe_chunk := false
 var first_safe_chunk := true
 var current_chunk: Node2D = null
+
 var rate := 0.1
 var powers := ["speed", "jump", "freeze"]
 
 func _ready():
+	Global.score = 0
+
 	print(Input.get_connected_joypads())
 	print("test with logan for git")
 	add_to_group("main")
@@ -64,6 +67,9 @@ func _ready():
 
 
 func _process(delta):
+	
+	
+	
 	if not p2_joined and Input.is_action_just_pressed(join_action):
 		_join_player2()
 
@@ -93,6 +99,9 @@ func _process(delta):
 	_update_camera()
 	
 	# Update the visual line's X position to match your logic wall
+	Global.score = _get_living_player_x()
+
+	
 	decay_line.global_position.x = decay_wall_x - 1100
 	
 	if in_safe_chunk:
@@ -163,14 +172,14 @@ func _connect_chunk_signals(chunk: Node2D):
 		checkpoint.body_entered.connect(_on_checkpoint_reached)
 	var decay_off = chunk.get_node_or_null("DecayOff")
 	if decay_off:
-		decay_off.body_entered.connect(func(body): _on_chunk_decay_off(body, decay_off))
+		decay_off.body_entered.connect(func(body): _on_chunk_decay_off(body, decay_off, chunk))
 	var decay_on = chunk.get_node_or_null("DecayOn")
 	if decay_on:
 		decay_on.body_entered.connect(func(body): _on_chunk_decay_on(body, decay_on))
 
 func _on_checkpoint_reached(body):
 	pass
-func _on_chunk_decay_off(body, area):
+func _on_chunk_decay_off(body, area, chunk):
 	if (body == player1 or (p2_joined and body == player2)) and not triggered_decay_off.get(area, false):
 		triggered_decay_off[area] = true
 		decay_active = false
@@ -180,6 +189,7 @@ func _on_chunk_decay_off(body, area):
 			in_safe_chunk = false
 		else:
 			in_safe_chunk = true
+			safe_chunk_time = _extend_safe_time(chunk)
 			safe_timer = safe_chunk_time
 
 			if timer_label:
@@ -277,9 +287,18 @@ func _on_player_died(player):
 	elif player == player2:
 		player2_dead = true
 		print("player 2 died")
+	if player1_dead and not p2_joined:
+		if Global.score > Global.high_score:
+			Global.high_score = Global.score  # save new record
+		get_tree().change_scene_to_file("res://scenes/Menu.tscn")  # go back to menu
 	# both dead = reset
 	if player1_dead and player2_dead:
-		get_tree().reload_current_scene()
+		print("Everyone dead")
+		if Global.score > Global.high_score:
+			Global.high_score = Global.score  # save new record
+		get_tree().change_scene_to_file("res://scenes/Menu.tscn")  # go back to menu
+		
+
 	# one dead, one alive = wait for safe chunk to respawn
 
 func _respawn_dead_players():
@@ -325,6 +344,12 @@ func _update_chunk_speed():
 
 			return
 
+func _extend_safe_time(chunk: Node2D): 
+	var safe_chunk_powerup = chunk.get_node_or_null("poweruppointer")
+	if safe_chunk_powerup: 
+		safe_chunk_time += 3.0 
+	return safe_chunk_time
+	
 func _spawn_powerup_in_chunk(coords):
 	var powerup_inst = powerup_scene.instantiate()
 	add_child(powerup_inst)
