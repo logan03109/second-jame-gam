@@ -12,6 +12,8 @@ extends Node2D
 @export var safe_chunk_interval := 1
 @export var safe_chunk_time := 2.0
 @export var powerup_spawn_chance := 0.2
+@export var crack_texture: Texture2D
+@export var crack_offset := 500
 
 @onready var timer_label := $CanvasLayer/TimerLabel
 @onready var score_label := $CanvasLayer/ScoreLabel
@@ -23,7 +25,6 @@ extends Node2D
 @onready var decay_line := $DecayLine
 @onready var powerup := $Powerup
 @onready var powerup_scene: Resource = preload("res://scenes/powerup.tscn")
-
 var decay_wall_x        := -200.0
 var tile_decay          := {}
 var cached_cells        := []
@@ -249,7 +250,19 @@ func _apply_decay_to_tiles():
 			var factor: float = clamp(inverse_lerp(0.0, 600.0, dist_behind), 0.0, 1.0)
 			var key := str(tm.get_instance_id()) + ":" + str(cell)
 			tile_decay[key] = factor
+
+			var dist_to_crack: float = (decay_wall_x - crack_offset) - world_pos.x
+			if dist_to_crack >= 0 and not entry.get("cracked", false):
+				entry["cracked"] = true
+				var sprite = Sprite2D.new()
+				sprite.texture = crack_texture
+				sprite.global_position = world_pos
+				add_child(sprite)
+				entry["sprite"] = sprite
+
 			if factor >= 1.0:
+				if entry.get("sprite") and is_instance_valid(entry["sprite"]):
+					entry["sprite"].queue_free()
 				cached_cells.erase(entry)
 				tm.erase_cell(0, cell)
 

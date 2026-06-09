@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://rw003wb3l6jy" path="res://assets/stone tile dark.png" id="1_6hmeb"]
 [ext_resource type="Script" uid="uid://vr4kpy6uvkeg" path="res://scripts/scene_scripts/chunk_4.gd" id="1_cvr14"]
 [ext_resource type="Texture2D" uid="uid://ci0vubrwyojin" path="res://assets/grass stone tile.png" id="2_cvr14"]
+[ext_resource type="Texture2D" uid="uid://h2rm05jn4hxo" path="res://assets/tile 3 decayed.png" id="4_8875b"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8875b"]
 texture = ExtResource("1_6hmeb")
@@ -13,11 +14,17 @@ texture = ExtResource("1_6hmeb")
 texture = ExtResource("2_cvr14")
 0:0/0 = 0
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7300w"]
+texture = ExtResource("4_8875b")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
 [sub_resource type="TileSet" id="TileSet_7300w"]
 physics_layer_0/collision_layer = 3
 physics_layer_0/collision_mask = 3
 sources/0 = SubResource("TileSetAtlasSource_8875b")
 sources/1 = SubResource("TileSetAtlasSource_hcybd")
+sources/3 = SubResource("TileSetAtlasSource_7300w")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iysbd"]
 size = Vector2(3, 120.5)

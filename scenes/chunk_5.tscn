@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://b8ei0qxkov3pa" path="res://assets/Screenshot 2026-06-04 113736.png" id="1_pmgtx"]
 [ext_resource type="Texture2D" uid="uid://bujd5gs24k1tu" path="res://assets/gd block second.png" id="2_edwfw"]
 [ext_resource type="Texture2D" uid="uid://rw003wb3l6jy" path="res://assets/stone tile dark.png" id="4_kgy54"]
-[ext_resource type="Texture2D" uid="uid://ci0vubrwyojin" path="res://assets/grass stone tile.png" id="4_m3ala"]
+[ext_resource type="Texture2D" uid="uid://cmd4j5s1ga6en" path="res://assets/tile 4 decayed.png" id="4_m3ala"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0dxg6"]
 texture = ExtResource("1_pmgtx")
@@ -18,7 +18,7 @@ texture = ExtResource("2_edwfw")
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_25xth"]
 texture = ExtResource("4_m3ala")
 0:0/0 = 0
-0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 8, -8, -8, 8, -8, 8, 8)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_m3ala"]
 texture = ExtResource("4_kgy54")
