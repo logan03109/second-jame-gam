@@ -16,6 +16,8 @@ extends Node2D
 @onready var player2         := $player_2
 @onready var chunk_container := $Chunks
 @onready var decay_line := $DecayLine
+@onready var powerup := $Powerup
+@onready var powerup_scene: Resource = preload("res://scenes/powerup.tscn")
 
 var decay_wall_x        := -200.0
 var tile_decay          := {}
@@ -33,6 +35,9 @@ var safe_timer := 0.0
 var in_safe_chunk := false
 var first_safe_chunk := true
 var current_chunk: Node2D = null
+
+var rate := 0.1
+var powers := ["speed", "jump", "freeze"]
 
 func _ready():
 	Global.score = 0
@@ -149,6 +154,8 @@ func _spawn_chunk():
 	active_chunks.append(chunk)
 	_connect_chunk_signals(chunk)
 	_add_chunk_cells(chunk)
+	var powerup_coords: Vector2 = Vector2(next_chunk_x, 0)
+	_spawn_powerup_in_chunk(powerup_coords)
 
 func _add_chunk_cells(chunk: Node2D):
 	var chunk_tilemap = chunk.get_node_or_null("TileMap")
@@ -165,14 +172,14 @@ func _connect_chunk_signals(chunk: Node2D):
 		checkpoint.body_entered.connect(_on_checkpoint_reached)
 	var decay_off = chunk.get_node_or_null("DecayOff")
 	if decay_off:
-		decay_off.body_entered.connect(func(body): _on_chunk_decay_off(body, decay_off))
+		decay_off.body_entered.connect(func(body): _on_chunk_decay_off(body, decay_off, chunk))
 	var decay_on = chunk.get_node_or_null("DecayOn")
 	if decay_on:
 		decay_on.body_entered.connect(func(body): _on_chunk_decay_on(body, decay_on))
 
 func _on_checkpoint_reached(body):
 	pass
-func _on_chunk_decay_off(body, area):
+func _on_chunk_decay_off(body, area, chunk):
 	if (body == player1 or (p2_joined and body == player2)) and not triggered_decay_off.get(area, false):
 		triggered_decay_off[area] = true
 		decay_active = false
@@ -182,6 +189,7 @@ func _on_chunk_decay_off(body, area):
 			in_safe_chunk = false
 		else:
 			in_safe_chunk = true
+			safe_chunk_time = _extend_safe_time(chunk)
 			safe_timer = safe_chunk_time
 
 			if timer_label:
@@ -335,3 +343,18 @@ func _update_chunk_speed():
 					print("Decay speed changed to ", decay_speed)
 
 			return
+
+func _extend_safe_time(chunk: Node2D): 
+	var safe_chunk_powerup = chunk.get_node_or_null("poweruppointer")
+	if safe_chunk_powerup: 
+		safe_chunk_time += 3.0 
+	return safe_chunk_time
+	
+func _spawn_powerup_in_chunk(coords):
+	var powerup_inst = powerup_scene.instantiate()
+	add_child(powerup_inst)
+	powerup_inst.set_position(coords)
+	print("Spawned at ", coords)
+
+func _on_power_up_body_entered(body: Node2D) -> void:
+	pass # Replace with function body.
