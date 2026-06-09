@@ -1,3 +1,5 @@
+#main.gd
+
 extends Node2D
 @export var decay_speed        := 200.0
 @export var min_zoom           := 1.0
