@@ -91,6 +91,7 @@ func _process(delta):
 	decay_line.global_position.x = decay_wall_x - 1100
 	
 	if in_safe_chunk:
+		print("in safe chunk")
 		safe_timer -= delta
 
 		timer_label.text = "Decay resumes in: %.1f" % safe_timer
