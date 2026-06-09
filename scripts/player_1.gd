@@ -75,6 +75,8 @@ func _physics_process(delta):
 		velocity.x = move_toward(velocity.x, direction * SPEED, INIT_ACCEL * delta)
 		anim.play("run")
 		anim.flip_h = direction < 0
+		anim.play("jump")
+
 	elif direction:
 		velocity.x += 50
 		velocity.x = move_toward(velocity.x, direction * SPEED, INIT_ACCEL * delta)
@@ -82,7 +84,7 @@ func _physics_process(delta):
 		anim.flip_h = direction < 0
 	elif not is_on_floor():
 		velocity.x = move_toward(velocity.x, 0, AIR_RESISTANCE * delta)
-		anim.play("idle")  # or "jump" if you have one
+		anim.play("jump")
 	else:
 		velocity.x = move_toward(velocity.x, 0, FRICTION * delta)
 		anim.play("idle")
