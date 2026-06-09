@@ -13,6 +13,8 @@ extends Node2D
 @export var safe_chunk_time := 2.0
 
 @onready var timer_label := $CanvasLayer/TimerLabel
+@onready var score_label := $CanvasLayer/ScoreLabel
+
 @onready var camera          := $GameCamera
 @onready var player1         := $player_1
 @onready var player2         := $player_2
@@ -103,13 +105,16 @@ func _process(delta):
 	# Update the visual line's X position to match your logic wall
 	Global.score = _get_living_player_x()
 
+	if _get_living_player_x() != null and is_instance_valid(score_label):
+		score_label.text = "    CURRENT SCORE: %d" % int(_get_living_player_x())
+
 	
 	decay_line.global_position.x = decay_wall_x - 1100
 	
 	if in_safe_chunk:
 		safe_timer -= delta
 
-		timer_label.text = "Decay resumes in: %.1f" % safe_timer
+		timer_label.text = "\n    Decay resumes in: %.1f" % safe_timer
 
 		if safe_timer <= 0:
 			in_safe_chunk = false

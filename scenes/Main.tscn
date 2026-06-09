@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://c4w4djvera0lb" path="res://scenes/chunk_5.tscn" id="6_q8u5g"]
 [ext_resource type="PackedScene" uid="uid://t60pgi0w1ghl" path="res://scenes/GDLTchunk.tscn" id="7_wp0k4"]
 [ext_resource type="Texture2D" uid="uid://dj3vtbyyryeuv" path="res://assets/background v4.png" id="10_lhr70"]
+[ext_resource type="FontFile" uid="uid://cfugxf8f24uka" path="res://assets/ARCADECLASSIC.TTF" id="12_mwfav"]
 
 [node name="Node2D" type="Node2D" unique_id=1314541290]
 script = ExtResource("1_rvslj")
@@ -51,5 +52,13 @@ texture = ExtResource("10_lhr70")
 [node name="TimerLabel" type="Label" parent="CanvasLayer" unique_id=961418659]
 offset_right = 40.0
 offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("12_mwfav")
+theme_override_font_sizes/font_size = 22
+
+[node name="ScoreLabel" type="Label" parent="CanvasLayer" unique_id=1148450014]
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("12_mwfav")
+theme_override_font_sizes/font_size = 22
 
 [node name="Powerup" type="Node2D" parent="." unique_id=1121058568]
