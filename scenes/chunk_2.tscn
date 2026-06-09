@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://j1etn6qdep6"]
 
+[ext_resource type="Script" uid="uid://eyhww75f1qns" path="res://scripts/scene_scripts/chunk_2.gd" id="1_qnukp"]
 [ext_resource type="Texture2D" uid="uid://rw003wb3l6jy" path="res://assets/stone tile dark.png" id="1_qywaf"]
 [ext_resource type="Texture2D" uid="uid://ci0vubrwyojin" path="res://assets/grass stone tile.png" id="2_qnukp"]
 
@@ -22,6 +23,7 @@ sources/1 = SubResource("TileSetAtlasSource_gsspq")
 size = Vector2(3, 120.5)
 
 [node name="Chunk1" type="Node2D" unique_id=1976061801]
+script = ExtResource("1_qnukp")
 
 [node name="TileMap" type="TileMap" parent="." unique_id=1417962687]
 tile_set = SubResource("TileSet_lvfo5")

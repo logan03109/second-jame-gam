@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://dc5yoqremo2et" path="res://assets/character 1 frame 4.png" id="6_s0g1m"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3li8b"]
+size = Vector2(15, 26)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_xmx1o"]
 animations = [{
@@ -44,6 +45,7 @@ animations = [{
 script = ExtResource("1_p0vlq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=340616201]
+position = Vector2(-0.5, -4)
 shape = SubResource("RectangleShape2D_3li8b")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=202130230]

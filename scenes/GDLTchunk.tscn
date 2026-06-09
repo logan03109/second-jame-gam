@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://t60pgi0w1ghl"]
 
 [ext_resource type="Texture2D" uid="uid://b8ei0qxkov3pa" path="res://assets/Screenshot 2026-06-04 113736.png" id="1_acjtj"]
+[ext_resource type="Script" uid="uid://chl7is63tud05" path="res://scripts/scene_scripts/gdl_tchunk.gd" id="1_mm4kq"]
 [ext_resource type="Texture2D" uid="uid://bujd5gs24k1tu" path="res://assets/gd block second.png" id="2_mm4kq"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0dxg6"]
@@ -22,6 +23,7 @@ sources/1 = SubResource("TileSetAtlasSource_gsspq")
 size = Vector2(3, 120.5)
 
 [node name="Chunk1" type="Node2D" unique_id=1976061801]
+script = ExtResource("1_mm4kq")
 
 [node name="TileMap" type="TileMap" parent="." unique_id=1417962687]
 tile_set = SubResource("TileSet_lvfo5")

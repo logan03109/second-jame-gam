@@ -46,3 +46,9 @@ z_index = -10
 position = Vector2(27, -472)
 scale = Vector2(0.52, 0.52)
 texture = ExtResource("10_lhr70")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=863344744]
+
+[node name="TimerLabel" type="Label" parent="CanvasLayer" unique_id=961418659]
+offset_right = 40.0
+offset_bottom = 23.0

@@ -8,7 +8,9 @@ extends Node2D
 @export var chunk_scenes: Array[PackedScene] = []
 @export var start_chunk: PackedScene
 @export var safe_chunk_interval := 1
+@export var safe_chunk_time := 5.0
 
+@onready var timer_label := $CanvasLayer/TimerLabel
 @onready var camera          := $GameCamera
 @onready var player1         := $player_1
 @onready var player2         := $player_2
@@ -27,6 +29,10 @@ var triggered_decay_off := {}
 var triggered_decay_on  := {}
 var pending_spawn       := ""
 var spawn_ready         := false  # blocks _check_chunks until ready
+var safe_timer := 0.0
+var in_safe_chunk := false
+var first_safe_chunk := true
+var current_chunk: Node2D = null
 
 func _ready():
 	add_to_group("main")
@@ -52,7 +58,8 @@ func _process(delta):
 	elif pending_spawn == "danger":
 		pending_spawn = ""
 		_spawn_chunk()
-
+	
+	_update_chunk_speed()
 	if decay_active:
 		decay_wall_x += decay_speed * delta
 
@@ -72,6 +79,21 @@ func _process(delta):
 	
 	# Update the visual line's X position to match your logic wall
 	decay_line.global_position.x = decay_wall_x - 1100
+	
+	if in_safe_chunk:
+		safe_timer -= delta
+
+		timer_label.text = "Decay resumes in: %.1f" % safe_timer
+
+		if safe_timer <= 0:
+			in_safe_chunk = false
+			decay_active = true
+			timer_label.visible = false
+
+			# Start decay from current player position
+			decay_wall_x = _get_living_player_x() + decay_start_offset
+	else:
+			timer_label.visible = false
 
 func _spawn_specific_chunk(scene: PackedScene):
 	if scene == null:
@@ -134,6 +156,18 @@ func _on_chunk_decay_off(body, area):
 	if (body == player1 or (p2_joined and body == player2)) and not triggered_decay_off.get(area, false):
 		triggered_decay_off[area] = true
 		decay_active = false
+		if first_safe_chunk:
+			first_safe_chunk = false
+			timer_label.visible = false
+			in_safe_chunk = false
+		else:
+			in_safe_chunk = true
+			safe_timer = safe_chunk_time
+
+			if timer_label:
+				timer_label.visible = true
+				timer_label.text = "Decay resumes in: %d" % int(ceil(safe_timer))
+
 		_respawn_dead_players()
 
 func _on_chunk_decay_on(body, area):
@@ -251,3 +285,24 @@ func _get_living_player_x() -> float:
 	elif not player2_dead and p2_joined:
 		return player2.global_position.x
 	return player1.global_position.x  # fallback
+	
+func _update_chunk_speed():
+	var player_x = _get_living_player_x()
+
+	for chunk in active_chunks:
+		var end_marker = chunk.get_node_or_null("EndPoint")
+		if end_marker == null:
+			continue
+
+		var chunk_start = chunk.global_position.x
+		var chunk_end = chunk.global_position.x + end_marker.position.x
+
+		if player_x >= chunk_start and player_x < chunk_end:
+			if chunk != current_chunk:
+				current_chunk = chunk
+
+				if "chunk_decay_speed" in chunk:
+					decay_speed = chunk.chunk_decay_speed
+					print("Decay speed changed to ", decay_speed)
+
+			return
