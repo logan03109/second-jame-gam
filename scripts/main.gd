@@ -35,6 +35,8 @@ var first_safe_chunk := true
 var current_chunk: Node2D = null
 
 func _ready():
+	Global.score = 0
+
 	print(Input.get_connected_joypads())
 	print("test with logan for git")
 	add_to_group("main")
@@ -60,6 +62,9 @@ func _ready():
 
 
 func _process(delta):
+	
+	
+	
 	if not p2_joined and Input.is_action_just_pressed(join_action):
 		_join_player2()
 
@@ -89,6 +94,9 @@ func _process(delta):
 	_update_camera()
 	
 	# Update the visual line's X position to match your logic wall
+	Global.score = _get_living_player_x()
+
+	
 	decay_line.global_position.x = decay_wall_x - 1100
 	
 	if in_safe_chunk:
@@ -271,9 +279,18 @@ func _on_player_died(player):
 	elif player == player2:
 		player2_dead = true
 		print("player 2 died")
+	if player1_dead and not p2_joined:
+		if Global.score > Global.high_score:
+			Global.high_score = Global.score  # save new record
+		get_tree().change_scene_to_file("res://scenes/Menu.tscn")  # go back to menu
 	# both dead = reset
 	if player1_dead and player2_dead:
-		get_tree().reload_current_scene()
+		print("Everyone dead")
+		if Global.score > Global.high_score:
+			Global.high_score = Global.score  # save new record
+		get_tree().change_scene_to_file("res://scenes/Menu.tscn")  # go back to menu
+		
+
 	# one dead, one alive = wait for safe chunk to respawn
 
 func _respawn_dead_players():

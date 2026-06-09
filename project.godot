@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="sidescroller"
-run/main_scene="uid://b1je7gs8304r8"
+run/main_scene="uid://bcnfwb6d51i8o"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://assets/icon.svg"
 
