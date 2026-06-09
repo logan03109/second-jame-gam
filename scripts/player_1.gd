@@ -97,6 +97,7 @@ func _physics_process(delta):
 			dash_direction = dir
 
 	if is_dashing:
+		anim.play("dash")
 		velocity.x = dash_direction * DASH_SPEED
 		velocity.y = 0.0
 		if dash_timer <= 0.0:
@@ -131,9 +132,7 @@ func _physics_process(delta):
 		else:
 			velocity.x = move_toward(velocity.x, 0, FRICTION * delta)
 			anim.play("idle")
-
-	if is_dashing:
-		anim.play("dash")
+		
 
 	move_and_slide()
 

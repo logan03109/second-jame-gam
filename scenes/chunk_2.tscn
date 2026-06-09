@@ -17,6 +17,7 @@ texture = ExtResource("2_qnukp")
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_iaaf2"]
 texture = ExtResource("4_bkmvv")
 0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
 [sub_resource type="TileSet" id="TileSet_lvfo5"]
 physics_layer_0/collision_layer = 3
@@ -28,7 +29,7 @@ sources/2 = SubResource("TileSetAtlasSource_iaaf2")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lx8el"]
 size = Vector2(3, 120.5)
 
-[node name="Chunk1" type="Node2D" unique_id=1976061801]
+[node name="Chunk2" type="Node2D" unique_id=1976061801]
 position = Vector2(58, 66)
 script = ExtResource("1_qnukp")
 
