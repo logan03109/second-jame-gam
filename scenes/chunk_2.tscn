@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://eyhww75f1qns" path="res://scripts/scene_scripts/chunk_2.gd" id="1_qnukp"]
 [ext_resource type="Texture2D" uid="uid://rw003wb3l6jy" path="res://assets/stone tile dark.png" id="1_qywaf"]
 [ext_resource type="Texture2D" uid="uid://ci0vubrwyojin" path="res://assets/grass stone tile.png" id="2_qnukp"]
+[ext_resource type="Texture2D" uid="uid://cfb8dbbm6krt3" path="res://assets/tile 6 copper.png" id="4_bkmvv"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0dxg6"]
 texture = ExtResource("1_qywaf")
@@ -13,22 +14,28 @@ texture = ExtResource("1_qywaf")
 texture = ExtResource("2_qnukp")
 0:0/0 = 0
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_iaaf2"]
+texture = ExtResource("4_bkmvv")
+0:0/0 = 0
+
 [sub_resource type="TileSet" id="TileSet_lvfo5"]
 physics_layer_0/collision_layer = 3
 physics_layer_0/collision_mask = 3
 sources/0 = SubResource("TileSetAtlasSource_0dxg6")
 sources/1 = SubResource("TileSetAtlasSource_gsspq")
+sources/2 = SubResource("TileSetAtlasSource_iaaf2")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lx8el"]
 size = Vector2(3, 120.5)
 
 [node name="Chunk1" type="Node2D" unique_id=1976061801]
+position = Vector2(58, 66)
 script = ExtResource("1_qnukp")
 
 [node name="TileMap" type="TileMap" parent="." unique_id=1417962687]
 tile_set = SubResource("TileSet_lvfo5")
 format = 2
-layer_0/tile_data = PackedInt32Array(-65536, 0, 0, -65535, 0, 0, -65534, 0, 0, -65533, 0, 0, -65532, 0, 0, -65527, 0, 0, -65526, 0, 0, -65525, 0, 0, -65524, 0, 0, -65523, 0, 0, -65522, 0, 0, -65521, 0, 0, -65515, 0, 0, -65514, 0, 0, -65513, 0, 0, -65512, 0, 0, -65511, 0, 0, -65510, 0, 0, -65509, 0, 0, -65508, 0, 0, -65502, 0, 0, -65501, 0, 0, -65500, 0, 0, -65499, 0, 0, -65498, 0, 0, -65497, 0, 0, -65496, 0, 0, -65495, 0, 0, -65488, 0, 0, -65487, 0, 0, -65486, 0, 0, -65485, 0, 0, -65484, 0, 0, -65483, 0, 0, -65482, 0, 0, -65481, 0, 0, -65476, 0, 0, -65475, 0, 0, -65474, 0, 0, -65473, 0, 0, -65472, 0, 0, -65471, 0, 0, -65470, 0, 0, -65469, 0, 0, -65468, 0, 0, -65467, 0, 0, -65466, 0, 0, -65465, 0, 0, -65464, 0, 0)
+layer_0/tile_data = PackedInt32Array(-65536, 2, 0, -65535, 0, 0, -65534, 0, 0, -65533, 0, 0, -65532, 2, 0, -65527, 2, 0, -65526, 0, 0, -65525, 0, 0, -65524, 0, 0, -65523, 0, 0, -65522, 0, 0, -65521, 2, 0, -65515, 2, 0, -65514, 0, 0, -65513, 0, 0, -65512, 0, 0, -65511, 0, 0, -65510, 0, 0, -65509, 0, 0, -65508, 2, 0, -65502, 2, 0, -65501, 0, 0, -65500, 0, 0, -65499, 0, 0, -65498, 0, 0, -65497, 0, 0, -65496, 0, 0, -65495, 2, 0, -65488, 2, 0, -65487, 0, 0, -65486, 0, 0, -65485, 0, 0, -65484, 0, 0, -65483, 0, 0, -65482, 0, 0, -65481, 2, 0, -65476, 2, 0, -65475, 0, 0, -65474, 0, 0, -65473, 0, 0, -65472, 0, 0, -65471, 0, 0, -65470, 0, 0, -65469, 0, 0, -65468, 0, 0, -65467, 0, 0, -65466, 0, 0, -65465, 0, 0, -65464, 0, 0)
 
 [node name="SpawnPoint" type="Marker2D" parent="." unique_id=1105596745]
 position = Vector2(0, -16)
