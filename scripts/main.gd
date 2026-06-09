@@ -16,6 +16,8 @@ extends Node2D
 @onready var player2         := $player_2
 @onready var chunk_container := $Chunks
 @onready var decay_line := $DecayLine
+@onready var powerup := $Powerup
+@onready var powerup_scene: Resource = preload("res://scenes/powerup.tscn")
 
 var decay_wall_x        := -200.0
 var tile_decay          := {}
@@ -33,7 +35,9 @@ var safe_timer := 0.0
 var in_safe_chunk := false
 var first_safe_chunk := true
 var current_chunk: Node2D = null
-#var safe_chunk_powerup = false
+
+var rate := 0.1
+var powers := ["speed", "jump", "freeze"]
 
 func _ready():
 	print(Input.get_connected_joypads())
@@ -142,6 +146,8 @@ func _spawn_chunk():
 	active_chunks.append(chunk)
 	_connect_chunk_signals(chunk)
 	_add_chunk_cells(chunk)
+	var powerup_coords: Vector2 = Vector2(next_chunk_x, 0)
+	_spawn_powerup_in_chunk(powerup_coords)
 
 func _add_chunk_cells(chunk: Node2D):
 	var chunk_tilemap = chunk.get_node_or_null("TileMap")
@@ -327,3 +333,11 @@ func _extend_safe_time(chunk: Node2D):
 		safe_chunk_time += 3.0 
 	return safe_chunk_time
 	
+func _spawn_powerup_in_chunk(coords):
+	var powerup_inst = powerup_scene.instantiate()
+	add_child(powerup_inst)
+	powerup_inst.set_position(coords)
+	print("Spawned at ", coords)
+
+func _on_power_up_body_entered(body: Node2D) -> void:
+	pass # Replace with function body.
