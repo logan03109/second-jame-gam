@@ -21,3 +21,5 @@ position = Vector2(0, 3.75)
 shape = SubResource("RectangleShape2D_3li8b")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1376983246]
+
+[node name="SFX" type="AudioStreamPlayer" parent="." unique_id=1995065064]

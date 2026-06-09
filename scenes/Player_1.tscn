@@ -71,3 +71,7 @@ position = Vector2(0, -4)
 scale = Vector2(1, 0.953)
 sprite_frames = SubResource("SpriteFrames_xmx1o")
 animation = &"dash"
+frame_progress = 0.87188536
+
+[node name="SFX" type="AudioStreamPlayer" parent="." unique_id=1437318221]
+volume_db = -8.211

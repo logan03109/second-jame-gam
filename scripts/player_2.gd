@@ -6,6 +6,7 @@ extends CharacterBody2D
 @export var down_action := "p2_down"
 @export var dash_action := "p2_dash"
 @export var device_id := 1
+@onready var sfx = $SFX
 
 var SPEED = 200.0
 var JUMP_VELOCITY = -300.0
@@ -90,6 +91,8 @@ func _physics_process(delta):
 		dash_direction = dir if dir != 0 else dash_direction
 
 	if is_dashing:
+		sfx.stream = preload("res://assets/music and sfx/Dash.wav")
+		sfx.play()
 		velocity.x = dash_direction * DASH_SPEED
 		velocity.y = 0.0
 		if dash_timer <= 0.0:
@@ -100,6 +103,8 @@ func _physics_process(delta):
 	if jump and jump_count > 0:
 		jump_count -= 1
 		velocity.y = JUMP_VELOCITY
+		sfx.stream = preload("res://assets/music and sfx/jump.wav")
+		sfx.play()
 
 	if down and not is_on_floor():
 		velocity.y -= DOWN_VELOCITY

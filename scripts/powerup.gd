@@ -1,5 +1,5 @@
 extends Area2D
-
+@onready var sfx = $AudioStreamPlayer
 #@onready var powerup_sprite: Resource = preload("res://scenes/powerup.tscn")
 
 var rate := 0.1
@@ -19,4 +19,6 @@ func _on_body_shape_entered(body_rid: RID, body: Node2D, body_shape_index: int, 
 		var keys = powers.keys()
 		var random_key = keys[randi() % keys.size()]
 		body.apply_effect(random_key, powers[random_key])
+		sfx.play()
+		await sfx.finished
 		queue_free()

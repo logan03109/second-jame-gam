@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://br255qjg547ai" path="res://assets/tile 3 cracked.png" id="8_bjd11"]
 [ext_resource type="Texture2D" uid="uid://dj3vtbyyryeuv" path="res://assets/background v4.png" id="10_lhr70"]
 [ext_resource type="FontFile" uid="uid://cfugxf8f24uka" path="res://assets/ARCADECLASSIC.TTF" id="12_mwfav"]
+[ext_resource type="AudioStream" uid="uid://ddi84ajrstv3u" path="res://assets/music and sfx/Chiptune Loop Gameplay.wav" id="13_qmy6f"]
 
 [node name="Node2D" type="Node2D" unique_id=1314541290]
 script = ExtResource("1_rvslj")
@@ -64,3 +65,8 @@ theme_override_fonts/font = ExtResource("12_mwfav")
 theme_override_font_sizes/font_size = 22
 
 [node name="Powerup" type="Node2D" parent="." unique_id=1121058568]
+
+[node name="Music" type="AudioStreamPlayer" parent="." unique_id=1885356035]
+stream = ExtResource("13_qmy6f")
+volume_db = -20.175
+autoplay = true
