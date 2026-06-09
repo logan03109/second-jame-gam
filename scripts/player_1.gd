@@ -143,6 +143,7 @@ func _physics_process(delta):
 		if not is_on_floor():
 			velocity.x = move_toward(velocity.x, direction * SPEED, INIT_ACCEL * delta)
 			anim.play("jump")
+
 		else:
 			velocity.x = move_toward(velocity.x, direction * SPEED, INIT_ACCEL * delta)
 			anim.play("run")
@@ -156,6 +157,9 @@ func _physics_process(delta):
 		else:
 			velocity.x = move_toward(velocity.x, 0, FRICTION * delta)
 			anim.play("idle")
+			
+	if is_dashing:
+		anim.play("dash")
 
 	move_and_slide()
 
