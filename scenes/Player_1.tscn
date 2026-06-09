@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dmi6sonqyku02" path="res://scripts/player_1.gd" id="1_p0vlq"]
 [ext_resource type="Texture2D" uid="uid://blvtklug7alen" path="res://assets/character 1- standing v3.png" id="2_byfrp"]
+[ext_resource type="Texture2D" uid="uid://cuprmyqix5j5s" path="res://assets/character 1 dash v5.png" id="2_hiwc3"]
 [ext_resource type="Texture2D" uid="uid://bdsin7i04u1i3" path="res://assets/character 1 jump.png" id="3_hiwc3"]
 [ext_resource type="Texture2D" uid="uid://b0h70iypu18ql" path="res://assets/character 1 frame 1.png" id="3_tv582"]
 [ext_resource type="Texture2D" uid="uid://um55k2jhcjbx" path="res://assets/character 1 frame 2.png" id="4_hiwc3"]
@@ -13,6 +14,14 @@ size = Vector2(15, 26)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_xmx1o"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_hiwc3")
+}],
+"loop": true,
+"name": &"dash",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("2_byfrp")
@@ -61,4 +70,4 @@ shape = SubResource("RectangleShape2D_3li8b")
 position = Vector2(0, -4)
 scale = Vector2(1, 0.953)
 sprite_frames = SubResource("SpriteFrames_xmx1o")
-animation = &"jump"
+animation = &"dash"

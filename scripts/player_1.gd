@@ -88,5 +88,8 @@ func _physics_process(delta):
 	else:
 		velocity.x = move_toward(velocity.x, 0, FRICTION * delta)
 		anim.play("idle")
+		
+	if dash_timer > 0:
+		anim.play("dash")
 
 	move_and_slide()
