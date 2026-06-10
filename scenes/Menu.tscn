@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bcnfwb6d51i8o"]
 
 [ext_resource type="Script" uid="uid://cbtw6acipfaon" path="res://scripts/Menu.gd" id="1_xdvgc"]
-[ext_resource type="Texture2D" uid="uid://dj3vtbyyryeuv" path="res://assets/background v4.png" id="2_upctu"]
+[ext_resource type="Texture2D" uid="uid://dq6e0c432bikq" path="res://assets/titlescreen.png" id="2_jmdev"]
 [ext_resource type="FontFile" uid="uid://2jqagbx16b1s" path="res://assets/cour.ttf" id="3_11y2r"]
 [ext_resource type="FontFile" uid="uid://cfugxf8f24uka" path="res://assets/ARCADECLASSIC.TTF" id="3_o0tnf"]
 [ext_resource type="AudioStream" uid="uid://bkqmsu1aqmf3a" path="res://assets/music and sfx/Main Menu theme.wav" id="5_jmdev"]
@@ -25,52 +25,58 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -320.0
-offset_top = -1.0
-offset_bottom = 879.0
+offset_left = -686.0
+offset_top = -1040.0
+offset_right = 2034.0
+offset_bottom = 394.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_upctu")
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("2_jmdev")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TextureRect" unique_id=1862116378]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -29.0
-offset_top = 7.0
-offset_right = 190.0
-offset_bottom = 52.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 100
+[node name="VBoxContainer" type="VBoxContainer" parent="TextureRect" unique_id=1178538662]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
-[node name="Title" type="Label" parent="TextureRect/VBoxContainer" unique_id=122674207]
-layout_mode = 2
+[node name="Title" type="Label" parent="TextureRect" unique_id=122674207]
+layout_mode = 0
+offset_left = 307.0
+offset_top = 321.0
+offset_right = 2076.0
+offset_bottom = 1149.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_o0tnf")
-theme_override_font_sizes/font_size = 130
-text = "
-dustbound"
-horizontal_alignment = 1
+theme_override_font_sizes/font_size = 300
+text = "dust
+bound"
+horizontal_alignment = 3
 
-[node name="HighScoreLabel" type="Label" parent="TextureRect/VBoxContainer" unique_id=769835314]
-layout_mode = 2
+[node name="HighScoreLabel" type="Label" parent="TextureRect" unique_id=769835314]
+layout_mode = 0
+offset_left = 209.0
+offset_top = 1359.0
+offset_right = 1694.0
+offset_bottom = 1445.0
 theme_override_constants/outline_size = 0
 theme_override_constants/shadow_outline_size = 5
 theme_override_fonts/font = ExtResource("3_11y2r")
-theme_override_font_sizes/font_size = 27
+theme_override_font_sizes/font_size = 66
 text = "Press L in game for second player"
 horizontal_alignment = 1
 
-[node name="PlayButton" type="Button" parent="TextureRect/VBoxContainer" unique_id=1474529794]
+[node name="PlayButton" type="Button" parent="TextureRect" unique_id=1474529794]
 z_index = 3
 custom_minimum_size = Vector2(0, 200)
-layout_mode = 2
+layout_mode = 0
+offset_left = 284.0
+offset_top = 1057.0
+offset_right = 1497.0
+offset_bottom = 1268.0
 theme_override_fonts/font = ExtResource("3_o0tnf")
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 200
 text = "PLAY"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=966245604]
@@ -78,86 +84,8 @@ stream = ExtResource("5_jmdev")
 volume_db = -19.415
 autoplay = true
 
-[node name="SettingsPanel" type="Panel" parent="." unique_id=565494760]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1869675902]
+position = Vector2(29, -660)
+scale = Vector2(3, 3)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="SettingsPanel" unique_id=1089101729]
-layout_mode = 0
-offset_left = 236.0
-offset_top = 304.0
-offset_right = 982.0
-offset_bottom = 802.0
-
-[node name="Settings" type="Label" parent="SettingsPanel/VBoxContainer" unique_id=618583355]
-layout_mode = 2
-
-[node name="HSlider" type="HSlider" parent="SettingsPanel/VBoxContainer" unique_id=207359726]
-layout_mode = 2
-max_value = 1.0
-value = 1.0
-
-[node name="CloseButton" type="Button" parent="SettingsPanel" unique_id=1315500639]
-layout_mode = 0
-offset_left = 972.0
-offset_top = 266.0
-offset_right = 1127.0
-offset_bottom = 313.0
-text = "close
-"
-
-[node name="CreditsPanel" type="Panel" parent="." unique_id=1982166294]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CreditsPanel" unique_id=1205816423]
-layout_mode = 0
-offset_left = 114.0
-offset_top = 213.0
-offset_right = 1122.0
-offset_bottom = 813.0
-
-[node name="Credits" type="Label" parent="CreditsPanel/VBoxContainer" unique_id=1925238522]
-layout_mode = 2
-text = "Credits"
-
-[node name="Credits2" type="Label" parent="CreditsPanel/VBoxContainer" unique_id=114680801]
-layout_mode = 2
-text = "credits people"
-
-[node name="CloseButton" type="Button" parent="CreditsPanel" unique_id=481704226]
-layout_mode = 0
-offset_left = 972.0
-offset_top = 267.0
-offset_right = 1122.0
-offset_bottom = 316.0
-text = "close"
-
-[node name="CreditsButton" type="Button" parent="." unique_id=1977892990]
-custom_minimum_size = Vector2(10, 100)
-layout_mode = 0
-offset_left = -154.0
-offset_top = 368.0
-offset_right = 182.0
-offset_bottom = 468.0
-theme_override_fonts/font = ExtResource("3_o0tnf")
-text = "Credits
-"
-
-[node name="SettingsButton" type="Button" parent="." unique_id=1046155994]
-layout_mode = 0
-offset_left = 862.0
-offset_top = 377.0
-offset_right = 1244.0
-offset_bottom = 492.0
-theme_override_fonts/font = ExtResource("3_o0tnf")
-text = "settings"
-
-[connection signal="pressed" from="TextureRect/VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
-[connection signal="value_changed" from="SettingsPanel/VBoxContainer/HSlider" to="." method="_on_h_slider_value_changed"]
-[connection signal="pressed" from="SettingsPanel/CloseButton" to="." method="_on_close_button_pressed"]
-[connection signal="pressed" from="CreditsPanel/CloseButton" to="." method="_on_close_button_pressed"]
-[connection signal="pressed" from="CreditsButton" to="." method="_on_credits_button_pressed"]
-[connection signal="pressed" from="SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="TextureRect/PlayButton" to="." method="_on_play_button_pressed"]
