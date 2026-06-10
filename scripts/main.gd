@@ -1,5 +1,3 @@
-#main.gd
-
 extends Node2D
 @export var decay_speed        := 200.0
 @export var min_zoom           := 1.0
@@ -14,8 +12,8 @@ extends Node2D
 @export var powerup_spawn_chance := 0.2
 @export var crack_texture: Texture2D
 @export var crack_texture_2: Texture2D
-@export var crack_offset := 400.0   # stage 1 crack starts here
-@export var crack_offset_2 := 500.0  # stage 2 crack starts here
+@export var crack_offset := 400.0   #stage 1
+@export var crack_offset_2 := 500.0  #stage 2
 @export var debug_force_chunk: PackedScene = null
 
 @onready var timer_label := $CanvasLayer/TimerLabel
@@ -28,6 +26,10 @@ extends Node2D
 @onready var powerup := $Powerup
 @onready var powerup_scene: Resource = preload("res://scenes/powerup.tscn")
 @onready var powerup_label := $CanvasLayer/PowerupLabel
+
+@onready var fade_rect := $CanvasLayer2/ColorRect
+
+
 var decay_wall_x        := -200.0
 var tile_decay          := {}
 var cached_cells        := []
@@ -39,7 +41,7 @@ var chunks_since_safe   := 0
 var triggered_decay_off := {}
 var triggered_decay_on  := {}
 var pending_spawn       := ""
-var spawn_ready         := false  # blocks _check_chunks until ready
+var spawn_ready         := false
 var safe_timer := 0.0
 var in_safe_chunk := false
 var first_safe_chunk := true
@@ -107,7 +109,6 @@ func _process(delta):
 	_apply_decay_to_tiles()
 	_update_camera()
 	
-	# Update the visual line's X position to match your logic wall
 	Global.score = _get_living_player_x()
 
 	if _get_living_player_x() != null and is_instance_valid(score_label):
@@ -126,8 +127,6 @@ func _process(delta):
 			decay_active = true
 			timer_label.visible = false
 			safe_timer = -1
-
-			# Start decay from current player position
 			decay_wall_x = _get_living_player_x() + decay_start_offset
 	else:
 			timer_label.visible = false
@@ -173,7 +172,7 @@ func _spawn_chunk():
 	active_chunks.append(chunk)
 	_connect_chunk_signals(chunk)
 	_add_chunk_cells(chunk)
-	_spawn_powerups_in_chunk(chunk)  # changed
+	_spawn_powerups_in_chunk(chunk)
 
 func _add_chunk_cells(chunk: Node2D):
 	var chunk_tilemap = chunk.get_node_or_null("TileMap")
@@ -261,7 +260,7 @@ func _apply_decay_to_tiles():
 			var key := str(tm.get_instance_id()) + ":" + str(cell)
 			tile_decay[key] = factor
 
-			# stage 1 crack
+			#stage 1
 			var dist_to_crack: float = (decay_wall_x - crack_offset) - world_pos.x
 			if dist_to_crack >= 0 and not entry.get("cracked", false):
 				entry["cracked"] = true
@@ -271,7 +270,7 @@ func _apply_decay_to_tiles():
 				add_child(sprite)
 				entry["sprite"] = sprite
 
-			# stage 2 crack — swap sprite texture
+			#stage 2
 			var dist_to_crack_2: float = (decay_wall_x - crack_offset_2) - world_pos.x
 			if dist_to_crack_2 >= 0 and not entry.get("cracked_2", false):
 				entry["cracked_2"] = true
@@ -293,8 +292,6 @@ func _join_player2():
 func _update_camera():
 	var p1_pos: Vector2 = player1.global_position
 	var p2_pos: Vector2 = player2.global_position
-
-	# only include living players in camera calculation
 	var use_p2: bool = p2_joined and not player2_dead
 	var use_p1: bool = not player1_dead
 
@@ -327,14 +324,21 @@ func _on_player_died(player):
 		print("player 2 died")
 	if player1_dead and not p2_joined:
 		if Global.score > Global.high_score:
-			Global.high_score = Global.score  # save new record
-		get_tree().change_scene_to_file("res://scenes/Menu.tscn")  # go back to menu
-	# both dead = reset
+			Global.high_score = Global.score
+		_fade_to_menu()
 	if player1_dead and player2_dead:
 		print("Everyone dead")
 		if Global.score > Global.high_score:
-			Global.high_score = Global.score  # save new record
+			Global.high_score = Global.score
+		_fade_to_menu()
+		
+func _fade_to_menu():
+	var tween = create_tween()
+	tween.tween_property(fade_rect, "color", Color(0, 0, 0, 1), 1.5)
+	tween.tween_callback(func():
 		get_tree().change_scene_to_file("res://scenes/Menu.tscn")
+	)
+
 
 func _respawn_dead_players():
 	if player1_dead and not player2_dead and p2_joined:
@@ -356,7 +360,7 @@ func _get_living_player_x() -> float:
 		return player1.global_position.x
 	elif not player2_dead and p2_joined:
 		return player2.global_position.x
-	return player1.global_position.x  # fallback
+	return player1.global_position.x
 	
 func _update_chunk_speed():
 	var player_x = _get_living_player_x()
@@ -394,7 +398,7 @@ func _spawn_powerups_in_chunk(chunk: Node2D):
 				powerup_inst.global_position = child.global_position
 
 func _on_power_up_body_entered(body: Node2D) -> void:
-	pass # Replace with function body.
+	pass
 
 func show_powerup_label(text: String):
 	powerup_label.text = text

@@ -77,3 +77,13 @@ offset_bottom = 23.0
 stream = ExtResource("13_qmy6f")
 volume_db = -20.175
 autoplay = true
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="." unique_id=39198440]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer2" unique_id=70969585]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0.8117452, 0.36249012, 0)

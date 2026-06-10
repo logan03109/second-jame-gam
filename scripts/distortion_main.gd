@@ -14,8 +14,8 @@ extends Node2D
 @export var powerup_spawn_chance := 0.2
 @export var crack_texture: Texture2D
 @export var crack_texture_2: Texture2D
-@export var crack_offset := 400.0   # stage 1 crack starts here
-@export var crack_offset_2 := 500.0  # stage 2 crack starts here
+@export var crack_offset := 400.0
+@export var crack_offset_2 := 500.0
 @export var special_chunk: PackedScene = null
 @export var debug_force_chunk: PackedScene = null
 
@@ -39,7 +39,7 @@ var chunks_since_safe   := 0
 var triggered_decay_off := {}
 var triggered_decay_on  := {}
 var pending_spawn       := ""
-var spawn_ready         := false  # blocks _check_chunks until ready
+var spawn_ready         := false
 var safe_timer := 0.0
 var in_safe_chunk := false
 var first_safe_chunk := true
@@ -77,12 +77,8 @@ func _ready():
 
 
 func _process(delta):
-	
-	
-	
 	if not p2_joined and Input.is_action_just_pressed(join_action):
 		_join_player2()
-
 	if pending_spawn == "safe":
 		pending_spawn = ""
 		_spawn_specific_chunk(start_chunk)
@@ -108,18 +104,15 @@ func _process(delta):
 	_apply_decay_to_tiles()
 	_update_camera()
 	
-	# Update the visual line's X position to match your logic wall
 	Global.score = _get_living_player_x() * 2.0
 
 	if _get_living_player_x() != null and is_instance_valid(score_label):
 		score_label.text = "    CURRENT SCORE: %d" % int(_get_living_player_x())
 
-	
 	decay_line.global_position.x = decay_wall_x - 1100
 	
 	if in_safe_chunk:
 		safe_timer -= delta
-
 		timer_label.text = "\n    Decay resumes in: %.1f" % safe_timer
 
 		if safe_timer <= 0:
@@ -128,7 +121,6 @@ func _process(delta):
 			timer_label.visible = false
 			safe_timer = -1
 
-			# Start decay from current player position
 			decay_wall_x = _get_living_player_x() + decay_start_offset
 	else:
 			timer_label.visible = false
@@ -163,7 +155,6 @@ func _spawn_chunk():
 			return
 		scene = chunk_scenes[randi() % chunk_scenes.size()]
 		danger_chunks_spawned += 1
-	# ... rest of function unchanged
 	if chunk_scenes.is_empty():
 		print("NO CHUNKS IN ARRAY")
 		return
@@ -179,7 +170,7 @@ func _spawn_chunk():
 	active_chunks.append(chunk)
 	_connect_chunk_signals(chunk)
 	_add_chunk_cells(chunk)
-	_spawn_powerups_in_chunk(chunk)  # changed
+	_spawn_powerups_in_chunk(chunk)
 
 func _add_chunk_cells(chunk: Node2D):
 	var chunk_tilemap = chunk.get_node_or_null("TileMap")
@@ -267,7 +258,7 @@ func _apply_decay_to_tiles():
 			var key := str(tm.get_instance_id()) + ":" + str(cell)
 			tile_decay[key] = factor
 
-			# stage 1 crack
+			#stage 1
 			var dist_to_crack: float = (decay_wall_x - crack_offset) - world_pos.x
 			if dist_to_crack >= 0 and not entry.get("cracked", false):
 				entry["cracked"] = true
@@ -277,7 +268,7 @@ func _apply_decay_to_tiles():
 				add_child(sprite)
 				entry["sprite"] = sprite
 
-			# stage 2 crack — swap sprite texture
+			#stage 2
 			var dist_to_crack_2: float = (decay_wall_x - crack_offset_2) - world_pos.x
 			if dist_to_crack_2 >= 0 and not entry.get("cracked_2", false):
 				entry["cracked_2"] = true
@@ -299,8 +290,6 @@ func _join_player2():
 func _update_camera():
 	var p1_pos: Vector2 = player1.global_position
 	var p2_pos: Vector2 = player2.global_position
-
-	# only include living players in camera calculation
 	var use_p2: bool = p2_joined and not player2_dead
 	var use_p1: bool = not player1_dead
 
@@ -358,7 +347,7 @@ func _get_living_player_x() -> float:
 		return player1.global_position.x
 	elif not player2_dead and p2_joined:
 		return player2.global_position.x
-	return player1.global_position.x  # fallback
+	return player1.global_position.x
 	
 func _update_chunk_speed():
 	var player_x = _get_living_player_x()
@@ -367,18 +356,14 @@ func _update_chunk_speed():
 		var end_marker = chunk.get_node_or_null("EndPoint")
 		if end_marker == null:
 			continue
-
 		var chunk_start = chunk.global_position.x
 		var chunk_end = chunk.global_position.x + end_marker.position.x
-
 		if player_x >= chunk_start and player_x < chunk_end:
 			if chunk != current_chunk:
 				current_chunk = chunk
-
 				if "chunk_decay_speed" in chunk:
 					decay_speed = chunk.chunk_decay_speed
 					print("Decay speed changed to ", decay_speed)
-
 			return
 
 func _extend_safe_time(chunk: Node2D): 
@@ -396,4 +381,4 @@ func _spawn_powerups_in_chunk(chunk: Node2D):
 				powerup_inst.global_position = child.global_position
 
 func _on_power_up_body_entered(body: Node2D) -> void:
-	pass # Replace with function body.
+	pass

@@ -29,12 +29,12 @@ var is_dashing := false
 var dash_timer := 0.0
 var dash_cooldown_timer := 0.0
 var dash_direction := 1.0
-var pad_jump_prev := false  # track previous frame button state
+var pad_jump_prev := false 
 var dash_anim_timer := 0.0
-const DASH_ANIM_DURATION := 0.5  # tweak this
+const DASH_ANIM_DURATION := 0.5
 
 func _ready():
-	add_to_group("player")  # FIX: needed for powerup detection
+	add_to_group("player")
 
 func _on_landed():
 	pass
@@ -74,13 +74,12 @@ func _physics_process(delta):
 	var pad_left := axis_x < -0.2
 	var pad_right := axis_x > 0.2
 
-	# FIX: edge-detect controller jump manually
 	var pad_jump_cur := Input.is_joy_button_pressed(device_id, JOY_BUTTON_A)
 	var pad_jump := pad_jump_cur and not pad_jump_prev
 	pad_jump_prev = pad_jump_cur
 
 	var pad_dash_cur := Input.is_joy_button_pressed(device_id, JOY_BUTTON_RIGHT_SHOULDER)
-	var pad_dash_prev_local := false  # dash uses cooldown so held is fine, but edge is cleaner
+	var pad_dash_prev_local := false
 	var pad_dash := pad_dash_cur
 	var pad_down := Input.is_joy_button_pressed(device_id, JOY_BUTTON_LEFT_SHOULDER)
 

@@ -5,6 +5,29 @@
 [ext_resource type="FontFile" uid="uid://2jqagbx16b1s" path="res://assets/cour.ttf" id="3_11y2r"]
 [ext_resource type="FontFile" uid="uid://cfugxf8f24uka" path="res://assets/ARCADECLASSIC.TTF" id="3_o0tnf"]
 [ext_resource type="AudioStream" uid="uid://bkqmsu1aqmf3a" path="res://assets/music and sfx/Main Menu theme.wav" id="5_jmdev"]
+[ext_resource type="Texture2D" uid="uid://dawsge10t018a" path="res://assets/pixil-frame-0 (1).png" id="6_b6cxs"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jmdev"]
+bg_color = Color(0.124082975, 0.124082975, 0.1240829, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(0.49031234, 0.78763026, 0.44242463, 1)
+shadow_color = Color(0.35686275, 1, 0.76862746, 0.70980394)
+shadow_size = 30
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_b6cxs"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(250, 300, 1)
+direction = Vector3(0, -1, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 30.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.5
+scale_max = 2.0
+color = Color(1, 1, 1, 0.4)
 
 [node name="Menu" type="Control" unique_id=1671117714]
 layout_mode = 3
@@ -25,10 +48,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -686.0
-offset_top = -1040.0
-offset_right = 2034.0
-offset_bottom = 394.0
+offset_left = -1041.0001
+offset_top = -1033.0
+offset_right = 1679.0
+offset_bottom = 401.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.35, 0.35)
@@ -41,25 +64,26 @@ offset_bottom = 40.0
 
 [node name="Title" type="Label" parent="TextureRect" unique_id=122674207]
 layout_mode = 0
-offset_left = 307.0
-offset_top = 321.0
-offset_right = 2076.0
-offset_bottom = 1149.0
+offset_left = 277.14282
+offset_top = 362.8572
+offset_right = 2046.1428
+offset_bottom = 1190.8573
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = 3
 theme_override_fonts/font = ExtResource("3_o0tnf")
-theme_override_font_sizes/font_size = 300
+theme_override_font_sizes/font_size = 350
 text = "dust
 bound"
 horizontal_alignment = 3
 
 [node name="HighScoreLabel" type="Label" parent="TextureRect" unique_id=769835314]
 layout_mode = 0
-offset_left = 209.0
-offset_top = 1359.0
-offset_right = 1694.0
-offset_bottom = 1445.0
+offset_left = 219.99992
+offset_top = 1442.857
+offset_right = 1704.9999
+offset_bottom = 1528.857
 theme_override_constants/outline_size = 0
 theme_override_constants/shadow_outline_size = 5
 theme_override_fonts/font = ExtResource("3_11y2r")
@@ -71,12 +95,13 @@ horizontal_alignment = 1
 z_index = 3
 custom_minimum_size = Vector2(0, 200)
 layout_mode = 0
-offset_left = 284.0
-offset_top = 1057.0
-offset_right = 1497.0
-offset_bottom = 1268.0
+offset_left = 302.8571
+offset_top = 1128.5715
+offset_right = 1593.1426
+offset_bottom = 1339.5715
 theme_override_fonts/font = ExtResource("3_o0tnf")
 theme_override_font_sizes/font_size = 200
+theme_override_styles/hover = SubResource("StyleBoxFlat_jmdev")
 text = "PLAY"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=966245604]
@@ -85,7 +110,13 @@ volume_db = -19.415
 autoplay = true
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1869675902]
-position = Vector2(29, -660)
+position = Vector2(-332, -659)
 scale = Vector2(3, 3)
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=128558368]
+position = Vector2(-656, -660)
+amount = 5
+texture = ExtResource("6_b6cxs")
+process_material = SubResource("ParticleProcessMaterial_b6cxs")
 
 [connection signal="pressed" from="TextureRect/PlayButton" to="." method="_on_play_button_pressed"]

@@ -27,12 +27,12 @@ var is_dashing := false
 var dash_timer := 0.0
 var dash_cooldown_timer := 0.0
 var dash_direction := 1.0
-var pad_jump_prev := false  # FIX: edge-detect controller jump
+var pad_jump_prev := false 
 var dash_anim_timer := 0.0
-const DASH_ANIM_DURATION := 0.5  # tweak this
+const DASH_ANIM_DURATION := 0.5
 
 func _ready():
-	add_to_group("player")  # FIX: needed for powerup detection
+	add_to_group("player")
 
 func _on_landed():
 	pass
@@ -70,7 +70,6 @@ func _physics_process(delta):
 	var pad_left := axis_x < -0.2
 	var pad_right := axis_x > 0.2
 
-	# FIX: edge-detect so holding A doesn't spam jump
 	var pad_jump_cur := Input.is_joy_button_pressed(device_id, JOY_BUTTON_A)
 	var pad_jump := pad_jump_cur and not pad_jump_prev
 	pad_jump_prev = pad_jump_cur
@@ -141,7 +140,6 @@ func _physics_process(delta):
 
 	move_and_slide()
 
-# FIX: was missing entirely from p2
 func apply_effect(buff: String, duration: float):
 	match buff:
 		"speed":
