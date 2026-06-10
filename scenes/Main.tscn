@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://c4w4djvera0lb" path="res://scenes/chunk_5.tscn" id="6_q8u5g"]
 [ext_resource type="PackedScene" uid="uid://t60pgi0w1ghl" path="res://scenes/GDLTchunk.tscn" id="7_wp0k4"]
 [ext_resource type="Texture2D" uid="uid://br255qjg547ai" path="res://assets/tile 3 cracked.png" id="8_bjd11"]
+[ext_resource type="Texture2D" uid="uid://h2rm05jn4hxo" path="res://assets/tile 3 decayed.png" id="9_mwfav"]
 [ext_resource type="Texture2D" uid="uid://dj3vtbyyryeuv" path="res://assets/background v4.png" id="10_lhr70"]
 [ext_resource type="FontFile" uid="uid://cfugxf8f24uka" path="res://assets/ARCADECLASSIC.TTF" id="12_mwfav"]
 [ext_resource type="AudioStream" uid="uid://ddi84ajrstv3u" path="res://assets/music and sfx/Chiptune Loop Gameplay.wav" id="13_qmy6f"]
@@ -21,6 +22,7 @@ max_zoom = 3.0
 chunk_scenes = Array[PackedScene]([ExtResource("3_c01mt"), ExtResource("4_nxtc6"), ExtResource("5_jlsqs"), ExtResource("6_q8u5g"), ExtResource("7_wp0k4")])
 start_chunk = ExtResource("3_vcsgt")
 crack_texture = ExtResource("8_bjd11")
+crack_texture_2 = ExtResource("9_mwfav")
 
 [node name="GameCamera" type="Camera2D" parent="." unique_id=982389235]
 position_smoothing_enabled = true

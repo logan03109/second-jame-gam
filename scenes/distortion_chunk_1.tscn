@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://5bonai2y7q7y"]
+
+[ext_resource type="Script" uid="uid://vr4kpy6uvkeg" path="res://scripts/scene_scripts/chunk_4.gd" id="1_u78wf"]
+[ext_resource type="Texture2D" uid="uid://rw003wb3l6jy" path="res://assets/stone tile dark.png" id="2_k4afo"]
+[ext_resource type="Texture2D" uid="uid://ci0vubrwyojin" path="res://assets/grass stone tile.png" id="3_xdb3q"]
+[ext_resource type="Texture2D" uid="uid://h2rm05jn4hxo" path="res://assets/tile 3 decayed.png" id="4_al77g"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8875b"]
+texture = ExtResource("2_k4afo")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hcybd"]
+texture = ExtResource("3_xdb3q")
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7300w"]
+texture = ExtResource("4_al77g")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="TileSet" id="TileSet_7300w"]
+physics_layer_0/collision_layer = 3
+physics_layer_0/collision_mask = 3
+sources/0 = SubResource("TileSetAtlasSource_8875b")
+sources/1 = SubResource("TileSetAtlasSource_hcybd")
+sources/3 = SubResource("TileSetAtlasSource_7300w")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iysbd"]
+size = Vector2(3, 120.5)
+
+[node name="Chunk" type="Node2D" unique_id=1953445551]
+script = ExtResource("1_u78wf")
+
+[node name="TileMap" type="TileMap" parent="." unique_id=835326629]
+tile_set = SubResource("TileSet_7300w")
+format = 2
+layer_0/tile_data = PackedInt32Array(0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 6, 0, 0, 7, 0, 0, 8, 0, 0, -262137, 0, 0, -262136, 0, 0, -262135, 0, 0, -262134, 0, 0, -262133, 0, 0, -262132, 0, 0, -262131, 0, 0, -524274, 0, 0, -524273, 0, 0, -524272, 0, 0, -524271, 0, 0, -524270, 0, 0, -524269, 0, 0, -262124, 0, 0, -262123, 0, 0, -262122, 0, 0, -262121, 0, 0, -262120, 0, 0, -262119, 0, 0, -589795, 0, 0, -524259, 0, 0, -458723, 0, 0, -393187, 0, 0, -327651, 0, 0, -262115, 0, 0, -196579, 0, 0, -131043, 0, 0, 131093, 0, 0, 131094, 0, 0, 131095, 0, 0, 131096, 0, 0, 196633, 0, 0, 196634, 0, 0, 196635, 0, 0, 196636, 0, 0, 196637, 0, 0, 196638, 0, 0, 196639, 0, 0, 196640, 0, 0, 196641, 0, 0, 196642, 0, 0, 131106, 0, 0, 131107, 0, 0, 131108, 0, 0, 65572, 0, 0, 65573, 0, 0, 37, 0, 0, 38, 0, 0, -65498, 0, 0, -65497, 0, 0, -131033, 0, 0, -131032, 0, 0, -131031, 0, 0, -131030, 0, 0, -131029, 0, 0, -131028, 0, 0, -131027, 0, 0, -131026, 0, 0, -131022, 0, 0, -131021, 0, 0, -131020, 0, 0, -131012, 0, 0, -131005, 0, 0, -982980, 0, 0, -917444, 0, 0, -851908, 0, 0, -786372, 0, 0, -720836, 0, 0, -655300, 0, 0, -589764, 0, 0, -524228, 0, 0, -458692, 0, 0, -393156, 0, 0, -131004, 0, 0, -65468, 0, 0, -65467, 0, 0, -65466, 0, 0, -65465, 0, 0, -65464, 0, 0)
+
+[node name="SpawnPoint" type="Marker2D" parent="." unique_id=1514870045]
+position = Vector2(0, -16)
+
+[node name="EndPoint" type="Marker2D" parent="." unique_id=2128096973]
+position = Vector2(1168, -16)
+
+[node name="checkpoint" type="Area2D" parent="." unique_id=834651495]
+position = Vector2(1130, -42)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="checkpoint" unique_id=383210356]
+position = Vector2(35.5, -17.25)
+shape = SubResource("RectangleShape2D_iysbd")
+
+[node name="PowerupSpawn" type="Area2D" parent="." unique_id=969077147]
+position = Vector2(356, 17)

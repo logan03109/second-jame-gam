@@ -29,6 +29,8 @@ var dash_timer := 0.0
 var dash_cooldown_timer := 0.0
 var dash_direction := 1.0
 var pad_jump_prev := false  # track previous frame button state
+var dash_anim_timer := 0.0
+const DASH_ANIM_DURATION := 0.5  # tweak this
 
 func _ready():
 	add_to_group("player")  # FIX: needed for powerup detection
@@ -46,7 +48,10 @@ func _physics_process(delta):
 	if global_position.y > DEATH_Y:
 		_die()
 		return
-
+	
+	
+	if dash_anim_timer > 0.0:
+		dash_anim_timer -= delta
 	if dash_timer > 0.0:
 		dash_timer -= delta
 	if dash_cooldown_timer > 0.0:
@@ -88,6 +93,7 @@ func _physics_process(delta):
 		is_dashing = true
 		dash_timer = DASH_DURATION
 		dash_cooldown_timer = DASH_COOLDOWN
+		dash_anim_timer = DASH_ANIM_DURATION
 
 		var dir := 0
 		if left: dir -= 1
@@ -99,6 +105,7 @@ func _physics_process(delta):
 
 	if is_dashing:
 		anim.play("dash")
+		sfx.volume_db = 10.0
 		sfx.stream = preload("res://assets/music and sfx/Dash.wav")
 		sfx.play()
 		velocity.x = dash_direction * DASH_SPEED

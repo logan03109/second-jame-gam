@@ -30,7 +30,7 @@ size = Vector2(3, 120.5)
 
 [node name="Chunk1" type="Node2D" unique_id=1976061801]
 script = ExtResource("1_mm4kq")
-chunk_decay_speed = 50.0
+chunk_decay_speed = 100.0
 
 [node name="TileMap" type="TileMap" parent="." unique_id=1417962687]
 tile_set = SubResource("TileSet_lvfo5")

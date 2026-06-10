@@ -13,8 +13,9 @@ extends Node2D
 @export var safe_chunk_time := 2.0
 @export var powerup_spawn_chance := 0.2
 @export var crack_texture: Texture2D
-@export var crack_offset := 500
-
+@export var crack_texture_2: Texture2D
+@export var crack_offset := 400.0   # stage 1 crack starts here
+@export var crack_offset_2 := 500.0  # stage 2 crack starts here
 @onready var timer_label := $CanvasLayer/TimerLabel
 @onready var score_label := $CanvasLayer/ScoreLabel
 
@@ -251,6 +252,7 @@ func _apply_decay_to_tiles():
 			var key := str(tm.get_instance_id()) + ":" + str(cell)
 			tile_decay[key] = factor
 
+			# stage 1 crack
 			var dist_to_crack: float = (decay_wall_x - crack_offset) - world_pos.x
 			if dist_to_crack >= 0 and not entry.get("cracked", false):
 				entry["cracked"] = true
@@ -259,6 +261,13 @@ func _apply_decay_to_tiles():
 				sprite.global_position = world_pos
 				add_child(sprite)
 				entry["sprite"] = sprite
+
+			# stage 2 crack — swap sprite texture
+			var dist_to_crack_2: float = (decay_wall_x - crack_offset_2) - world_pos.x
+			if dist_to_crack_2 >= 0 and not entry.get("cracked_2", false):
+				entry["cracked_2"] = true
+				if entry.get("sprite") and is_instance_valid(entry["sprite"]):
+					entry["sprite"].texture = crack_texture_2
 
 			if factor >= 1.0:
 				if entry.get("sprite") and is_instance_valid(entry["sprite"]):
@@ -316,10 +325,7 @@ func _on_player_died(player):
 		print("Everyone dead")
 		if Global.score > Global.high_score:
 			Global.high_score = Global.score  # save new record
-		get_tree().change_scene_to_file("res://scenes/Menu.tscn")  # go back to menu
-		
-
-	# one dead, one alive = wait for safe chunk to respawn
+		get_tree().change_scene_to_file("res://scenes/Menu.tscn")
 
 func _respawn_dead_players():
 	if player1_dead and not player2_dead and p2_joined:

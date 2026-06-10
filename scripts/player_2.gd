@@ -7,6 +7,7 @@ extends CharacterBody2D
 @export var dash_action := "p2_dash"
 @export var device_id := 1
 @onready var sfx = $SFX
+@onready var anim = $AnimatedSprite2D
 
 var SPEED = 200.0
 var JUMP_VELOCITY = -300.0
@@ -27,6 +28,8 @@ var dash_timer := 0.0
 var dash_cooldown_timer := 0.0
 var dash_direction := 1.0
 var pad_jump_prev := false  # FIX: edge-detect controller jump
+var dash_anim_timer := 0.0
+const DASH_ANIM_DURATION := 0.5  # tweak this
 
 func _ready():
 	add_to_group("player")  # FIX: needed for powerup detection
@@ -43,7 +46,9 @@ func _physics_process(delta):
 	if global_position.y > DEATH_Y:
 		_die()
 		return
-
+	
+	if dash_anim_timer > 0.0:
+		dash_anim_timer -= delta
 	if dash_timer > 0.0:
 		dash_timer -= delta
 	if dash_cooldown_timer > 0.0:
@@ -83,6 +88,7 @@ func _physics_process(delta):
 		is_dashing = true
 		dash_timer = DASH_DURATION
 		dash_cooldown_timer = DASH_COOLDOWN
+		dash_anim_timer = DASH_ANIM_DURATION
 		var dir := 0
 		if left: dir -= 1
 		if right: dir += 1
@@ -91,6 +97,8 @@ func _physics_process(delta):
 		dash_direction = dir if dir != 0 else dash_direction
 
 	if is_dashing:
+		anim.play("dash")
+		sfx.volume_db = 5.0
 		sfx.stream = preload("res://assets/music and sfx/Dash.wav")
 		sfx.play()
 		velocity.x = dash_direction * DASH_SPEED
@@ -103,6 +111,7 @@ func _physics_process(delta):
 	if jump and jump_count > 0:
 		jump_count -= 1
 		velocity.y = JUMP_VELOCITY
+		sfx.volume_db = -30.0
 		sfx.stream = preload("res://assets/music and sfx/jump.wav")
 		sfx.play()
 
@@ -117,11 +126,18 @@ func _physics_process(delta):
 
 	if direction != 0:
 		velocity.x = move_toward(velocity.x, direction * SPEED, INIT_ACCEL * delta)
+		if not is_on_floor():
+			anim.play("jump")
+		else:
+			anim.play("run")
+		anim.flip_h = direction < 0
 	else:
 		if not is_on_floor():
 			velocity.x = move_toward(velocity.x, 0, AIR_RESISTANCE * delta)
+			anim.play("jump")
 		else:
 			velocity.x = move_toward(velocity.x, 0, FRICTION * delta)
+			anim.play("idle")
 
 	move_and_slide()
 

@@ -1,25 +1,75 @@
 [gd_scene format=3 uid="uid://doj1lafa43rle"]
 
 [ext_resource type="Script" uid="uid://cj6bb8kpb5m66" path="res://scripts/player_2.gd" id="1_7s6vm"]
-[ext_resource type="Texture2D" uid="uid://ddln83stjyssf" path="res://assets/icon.svg" id="2_7s6vm"]
+[ext_resource type="Texture2D" uid="uid://dy6ypdqhccboj" path="res://assets/character 2 dash.png" id="1_r2lbd"]
+[ext_resource type="Texture2D" uid="uid://cwv56rr6mtjoi" path="res://assets/character 2 idle.png" id="2_cxfll"]
+[ext_resource type="Texture2D" uid="uid://bb82uajy8j0hq" path="res://assets/character 2 jump (2).png" id="3_fu4pi"]
+[ext_resource type="Texture2D" uid="uid://5xiqptbtfadw" path="res://assets/character 2 frame1.png" id="4_5r5jy"]
+[ext_resource type="Texture2D" uid="uid://qugghh4t0q2a" path="res://assets/character 2 frame2.png" id="5_cbws6"]
+[ext_resource type="Texture2D" uid="uid://cq1ciuhhbgy6b" path="res://assets/character 2 frame3.png" id="6_vy33h"]
+[ext_resource type="Texture2D" uid="uid://bmx5kindo7whx" path="res://assets/character 2 frame4.png" id="7_pyj1r"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3li8b"]
-size = Vector2(16, 25.5)
+size = Vector2(13, 25.5)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cxfll"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_r2lbd")
+}],
+"loop": true,
+"name": &"dash",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_cxfll")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_fu4pi")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_5r5jy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_cbws6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_vy33h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_pyj1r")
+}],
+"loop": true,
+"name": &"run",
+"speed": 5.0
+}]
 
 [node name="player_2" type="CharacterBody2D" unique_id=479724984]
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("1_7s6vm")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=674797557]
-position = Vector2(-2.3841858e-07, 4.0000005)
-scale = Vector2(0.12499999, 0.203125)
-texture = ExtResource("2_7s6vm")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=340616201]
-position = Vector2(0, 3.75)
+position = Vector2(0.5, 3.75)
 shape = SubResource("RectangleShape2D_3li8b")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1376983246]
-
 [node name="SFX" type="AudioStreamPlayer" parent="." unique_id=1995065064]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=919278418]
+position = Vector2(0, 4)
+scale = Vector2(0.8, 0.93333334)
+sprite_frames = SubResource("SpriteFrames_cxfll")
+animation = &"jump"
+autoplay = "idle"
