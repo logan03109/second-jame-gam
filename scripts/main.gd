@@ -27,6 +27,7 @@ extends Node2D
 @onready var decay_line := $DecayLine
 @onready var powerup := $Powerup
 @onready var powerup_scene: Resource = preload("res://scenes/powerup.tscn")
+@onready var powerup_label := $CanvasLayer/PowerupLabel
 var decay_wall_x        := -200.0
 var tile_decay          := {}
 var cached_cells        := []
@@ -394,3 +395,9 @@ func _spawn_powerups_in_chunk(chunk: Node2D):
 
 func _on_power_up_body_entered(body: Node2D) -> void:
 	pass # Replace with function body.
+
+func show_powerup_label(text: String):
+	powerup_label.text = text
+	powerup_label.visible = true
+	await get_tree().create_timer(2.0).timeout
+	powerup_label.visible = false

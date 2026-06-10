@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cblexkiyh53a1"]
 
 [ext_resource type="Script" uid="uid://cb22qxfug4khb" path="res://scripts/powerup.gd" id="1_ih772"]
-[ext_resource type="Texture2D" uid="uid://njurry7dmfya" path="res://assets/Screenshot 2026-06-02 082823.png" id="2_406cw"]
+[ext_resource type="Texture2D" uid="uid://dawsge10t018a" path="res://assets/pixil-frame-0 (1).png" id="2_406cw"]
 [ext_resource type="AudioStream" uid="uid://3ao1eipsmlye" path="res://assets/music and sfx/powerUp.wav" id="3_406cw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qmy6f"]
@@ -13,8 +13,8 @@ script = ExtResource("1_ih772")
 shape = SubResource("RectangleShape2D_qmy6f")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1555853559]
-position = Vector2(-1.847744e-06, -8.34465e-07)
-scale = Vector2(0.12422358, 0.124223605)
+position = Vector2(12.999998, 10.499999)
+scale = Vector2(0.59999996, 0.61)
 texture = ExtResource("2_406cw")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1997883943]

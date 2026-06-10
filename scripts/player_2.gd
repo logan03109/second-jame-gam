@@ -148,7 +148,9 @@ func apply_effect(buff: String, duration: float):
 			SPEED *= 1.2
 			if SPEED > 1000:
 				SPEED = 1000
+			get_tree().call_group("main", "show_powerup_label", "Speed Up!")
 		"jump":
 			JUMP_VELOCITY *= 1.1
 			if JUMP_VELOCITY < -1200:
 				JUMP_VELOCITY = -1200
+			get_tree().call_group("main", "show_powerup_label", "Jump Up!")

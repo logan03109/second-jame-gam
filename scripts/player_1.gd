@@ -9,6 +9,7 @@ extends CharacterBody2D
 
 @onready var sfx = $SFX
 @onready var anim = $AnimatedSprite2D
+@onready var powerup_label := $CanvasLayer/PowerupLabel
 
 var SPEED = 200.0
 var JUMP_VELOCITY = -300.0
@@ -151,12 +152,12 @@ func _physics_process(delta):
 func apply_effect(buff: String, duration: float):
 	match buff:
 		"speed":
-			print("increase speed")
 			SPEED *= 1.2
 			if SPEED > 1000:
 				SPEED = 1000
+			get_tree().call_group("main", "show_powerup_label", "Speed Up!")
 		"jump":
-			print("increase jump")
 			JUMP_VELOCITY *= 1.1
 			if JUMP_VELOCITY < -1200:
 				JUMP_VELOCITY = -1200
+			get_tree().call_group("main", "show_powerup_label", "Jump Up!")

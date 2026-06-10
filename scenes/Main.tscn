@@ -23,7 +23,7 @@ chunk_scenes = Array[PackedScene]([ExtResource("3_c01mt"), ExtResource("4_nxtc6"
 start_chunk = ExtResource("3_vcsgt")
 crack_texture = ExtResource("8_bjd11")
 crack_texture_2 = ExtResource("9_mwfav")
-debug_force_chunk = ExtResource("4_nxtc6")
+debug_force_chunk = ExtResource("7_wp0k4")
 
 [node name="GameCamera" type="Camera2D" parent="." unique_id=982389235]
 position_smoothing_enabled = true
@@ -66,6 +66,10 @@ offset_right = 40.0
 offset_bottom = 23.0
 theme_override_fonts/font = ExtResource("12_mwfav")
 theme_override_font_sizes/font_size = 22
+
+[node name="PowerupLabel" type="Label" parent="CanvasLayer" unique_id=1097351186]
+offset_right = 40.0
+offset_bottom = 23.0
 
 [node name="Powerup" type="Node2D" parent="." unique_id=1121058568]
 

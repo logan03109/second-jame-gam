@@ -9,9 +9,9 @@
 [ext_resource type="Texture2D" uid="uid://h2rm05jn4hxo" path="res://assets/tile 3 decayed.png" id="9_mmiux"]
 [ext_resource type="PackedScene" uid="uid://doj1lafa43rle" path="res://scenes/Player_2.tscn" id="10_qlpro"]
 [ext_resource type="PackedScene" uid="uid://b03fh2hf2r74d" path="res://scenes/Player_1.tscn" id="11_1w1k8"]
+[ext_resource type="AudioStream" uid="uid://3qqlstje4v01" path="res://assets/music and sfx/Underworld (game music slowed).wav" id="12_kjqko"]
 [ext_resource type="Texture2D" uid="uid://dj3vtbyyryeuv" path="res://assets/background v4.png" id="12_vxni4"]
 [ext_resource type="FontFile" uid="uid://cfugxf8f24uka" path="res://assets/ARCADECLASSIC.TTF" id="13_biirf"]
-[ext_resource type="AudioStream" uid="uid://ddi84ajrstv3u" path="res://assets/music and sfx/Chiptune Loop Gameplay.wav" id="14_g5yvo"]
 
 [node name="Node2D" type="Node2D" unique_id=1314541290]
 script = ExtResource("1_q4nol")
@@ -68,6 +68,6 @@ theme_override_font_sizes/font_size = 22
 [node name="Powerup" type="Node2D" parent="." unique_id=1121058568]
 
 [node name="Music" type="AudioStreamPlayer" parent="." unique_id=1885356035]
-stream = ExtResource("14_g5yvo")
+stream = ExtResource("12_kjqko")
 volume_db = -20.175
 autoplay = true

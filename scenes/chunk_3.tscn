@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://ci0vubrwyojin" path="res://assets/grass stone tile.png" id="2_jnfqe"]
 [ext_resource type="Texture2D" uid="uid://h2rm05jn4hxo" path="res://assets/tile 3 decayed.png" id="4_4cbmi"]
 [ext_resource type="Script" uid="uid://57xbua6agell" path="res://scripts/area_2d.gd" id="4_4k65o"]
-[ext_resource type="Texture2D" uid="uid://b8ei0qxkov3pa" path="res://assets/Screenshot 2026-06-04 113736.png" id="5_4cbmi"]
+[ext_resource type="Texture2D" uid="uid://tj7rkxcbvgtc" path="res://assets/pixil-frame-0.png" id="6_4cbmi"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_sng7j"]
 texture = ExtResource("1_sng7j")
@@ -32,7 +32,7 @@ sources/2 = SubResource("TileSetAtlasSource_47xwu")
 size = Vector2(3, 120.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_47xwu"]
-size = Vector2(46, 47)
+size = Vector2(45, 68.5)
 
 [node name="Chunk" type="Node2D" unique_id=1161737643]
 script = ExtResource("1_jnfqe")
@@ -68,12 +68,24 @@ collision_mask = 3
 script = ExtResource("4_4k65o")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="portal" unique_id=611298017]
-position = Vector2(-1, 4)
+position = Vector2(-1.5, -6.75)
 shape = SubResource("RectangleShape2D_47xwu")
 
 [node name="Sprite2D" type="Sprite2D" parent="portal" unique_id=91531832]
-position = Vector2(-1.0000067, 3.0000024)
-scale = Vector2(2.875001, 2.8749998)
-texture = ExtResource("5_4cbmi")
+position = Vector2(-1.9999928, -9.999993)
+scale = Vector2(0.71, 0.84999996)
+texture = ExtResource("6_4cbmi")
+
+[node name="PowerupSpawn3" type="Area2D" parent="." unique_id=665089367]
+position = Vector2(412, -35)
+
+[node name="PowerupSpawn4" type="Area2D" parent="." unique_id=533998696]
+position = Vector2(412, -35)
+
+[node name="PowerupSpawn5" type="Area2D" parent="." unique_id=2102741364]
+position = Vector2(412, -35)
+
+[node name="PowerupSpawn6" type="Area2D" parent="." unique_id=815233670]
+position = Vector2(165, -16)
 
 [connection signal="body_entered" from="portal" to="." method="_on_area_2d_body_entered"]
