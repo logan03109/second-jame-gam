@@ -151,12 +151,12 @@ func _physics_process(delta):
 func apply_effect(buff: String, duration: float):
 	match buff:
 		"speed":
-			SPEED *= 1.2
+			SPEED *= 1.3
 			if SPEED > 1000:
 				SPEED = 1000
-			get_tree().call_group("main", "show_powerup_label", "Speed Up!")
+			get_tree().call_group("main", "show_powerup_label", "\n\n    Player 1 Acquired Powerup : SPEED BOOST ")
 		"jump":
-			JUMP_VELOCITY *= 1.1
+			JUMP_VELOCITY -= 150
 			if JUMP_VELOCITY < -1200:
 				JUMP_VELOCITY = -1200
-			get_tree().call_group("main", "show_powerup_label", "Jump Up!")
+			get_tree().call_group("main", "show_powerup_label", "\n\n    Player 1 Acquired Powerup : JUMP BOOST ")

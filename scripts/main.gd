@@ -71,7 +71,7 @@ func _ready():
 	#timerlabel
 	var settings = LabelSettings.new()
 	
-	settings.font_size = 25
+	settings.font_size = 32
 	settings.font_color = Color(255, 255, 255, 0.8)
 	
 	timer_label.label_settings = settings
@@ -79,6 +79,11 @@ func _ready():
 
 func _process(delta):
 	
+	
+	if _get_living_player_x() > 10000:
+		decay_speed = 230
+	elif _get_living_player_x() > 15000:
+		decay_speed = 250
 	
 	
 	if not p2_joined and Input.is_action_just_pressed(join_action):
