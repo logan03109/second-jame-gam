@@ -64,10 +64,10 @@ offset_bottom = 40.0
 
 [node name="Title" type="Label" parent="TextureRect" unique_id=122674207]
 layout_mode = 0
-offset_left = 277.14282
-offset_top = 362.8572
-offset_right = 2046.1428
-offset_bottom = 1190.8573
+offset_left = 422.85745
+offset_top = 282.8572
+offset_right = 2191.8574
+offset_bottom = 1110.8573
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -103,6 +103,19 @@ theme_override_fonts/font = ExtResource("3_o0tnf")
 theme_override_font_sizes/font_size = 200
 theme_override_styles/hover = SubResource("StyleBoxFlat_jmdev")
 text = "PLAY"
+
+[node name="Label" type="Label" parent="TextureRect" unique_id=921792408]
+layout_mode = 0
+offset_left = 351.4287
+offset_top = 1654.2855
+offset_right = 3678.4287
+offset_bottom = 2011.4283
+theme_override_fonts/font = ExtResource("3_o0tnf")
+theme_override_font_sizes/font_size = 60
+text = "Player 1: left = a/left joystick left, right = d/left_joystick_right, 
+jump = w/controller_button_X, down = s/Left_bumper, dash  = f/right_bumper
+Player 2: left = left_arrow/left joystick left, right = right_arrow/left_joystick_right,
+jump = up Arrow/controller_button_X, down = down_arrow/Left_bumper, dash  = slash/right_bumper"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=966245604]
 stream = ExtResource("5_jmdev")

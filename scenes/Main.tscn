@@ -23,7 +23,7 @@ chunk_scenes = Array[PackedScene]([ExtResource("3_c01mt"), ExtResource("4_nxtc6"
 start_chunk = ExtResource("3_vcsgt")
 crack_texture = ExtResource("8_bjd11")
 crack_texture_2 = ExtResource("9_mwfav")
-debug_force_chunk = ExtResource("7_wp0k4")
+debug_force_chunk = ExtResource("4_nxtc6")
 
 [node name="GameCamera" type="Camera2D" parent="." unique_id=982389235]
 position_smoothing_enabled = true

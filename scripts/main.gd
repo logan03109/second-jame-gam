@@ -405,3 +405,10 @@ func show_powerup_label(text: String):
 	powerup_label.visible = true
 	await get_tree().create_timer(2.0).timeout
 	powerup_label.visible = false
+	
+func _fade_to_scene(path: String):
+	var tween = create_tween()
+	tween.tween_property(fade_rect, "color", Color(0, 0, 0, 1), 1.0)
+	tween.tween_callback(func():
+		get_tree().change_scene_to_file(path)
+	)
