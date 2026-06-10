@@ -16,9 +16,11 @@ extends Node2D
 @export var crack_texture_2: Texture2D
 @export var crack_offset := 400.0   # stage 1 crack starts here
 @export var crack_offset_2 := 500.0  # stage 2 crack starts here
+@export var special_chunk: PackedScene = null
+@export var debug_force_chunk: PackedScene = null
+
 @onready var timer_label := $CanvasLayer/TimerLabel
 @onready var score_label := $CanvasLayer/ScoreLabel
-
 @onready var camera          := $GameCamera
 @onready var player1         := $player_1
 @onready var player2         := $player_2
@@ -42,7 +44,8 @@ var safe_timer := 0.0
 var in_safe_chunk := false
 var first_safe_chunk := true
 var current_chunk: Node2D = null
-
+var danger_chunks_spawned := 0
+const SPECIAL_CHUNK_THRESHOLD := 3
 var rate := 0.1
 var powers := ["speed", "jump", "freeze"]
 
@@ -148,10 +151,22 @@ func _spawn_specific_chunk(scene: PackedScene):
 	_add_chunk_cells(chunk)
 
 func _spawn_chunk():
+	var scene: PackedScene
+	if debug_force_chunk != null:
+		scene = debug_force_chunk
+	elif special_chunk != null and danger_chunks_spawned >= SPECIAL_CHUNK_THRESHOLD:
+		scene = special_chunk
+		danger_chunks_spawned = 0
+	else:
+		if chunk_scenes.is_empty():
+			print("NO CHUNKS IN ARRAY")
+			return
+		scene = chunk_scenes[randi() % chunk_scenes.size()]
+		danger_chunks_spawned += 1
+	# ... rest of function unchanged
 	if chunk_scenes.is_empty():
 		print("NO CHUNKS IN ARRAY")
 		return
-	var scene: PackedScene = chunk_scenes[randi() % chunk_scenes.size()]
 	var chunk: Node2D = scene.instantiate()
 	chunk_container.add_child(chunk)
 	var spawn_marker = chunk.get_node_or_null("SpawnPoint")

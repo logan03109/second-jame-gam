@@ -2,7 +2,9 @@
 
 [ext_resource type="Script" uid="uid://b2mi6o1ltygt5" path="res://scripts/distortion_main.gd" id="1_q4nol"]
 [ext_resource type="PackedScene" uid="uid://5bonai2y7q7y" path="res://scenes/distortion_chunk_1.tscn" id="2_ijwpt"]
+[ext_resource type="PackedScene" uid="uid://dksglog408hhv" path="res://scenes/distortion_chunk_2.tscn" id="3_kjqko"]
 [ext_resource type="PackedScene" uid="uid://b17if56muo26m" path="res://scenes/safe_chunk.tscn" id="7_l5b4d"]
+[ext_resource type="PackedScene" uid="uid://b1gsy4053gp0f" path="res://scenes/distortion_chunk_3.tscn" id="7_uckae"]
 [ext_resource type="Texture2D" uid="uid://br255qjg547ai" path="res://assets/tile 3 cracked.png" id="8_jeans"]
 [ext_resource type="Texture2D" uid="uid://h2rm05jn4hxo" path="res://assets/tile 3 decayed.png" id="9_mmiux"]
 [ext_resource type="PackedScene" uid="uid://doj1lafa43rle" path="res://scenes/Player_2.tscn" id="10_qlpro"]
@@ -15,10 +17,11 @@
 script = ExtResource("1_q4nol")
 decay_speed = 210.0
 max_zoom = 3.0
-chunk_scenes = Array[PackedScene]([ExtResource("2_ijwpt")])
+chunk_scenes = Array[PackedScene]([ExtResource("2_ijwpt"), ExtResource("3_kjqko")])
 start_chunk = ExtResource("7_l5b4d")
 crack_texture = ExtResource("8_jeans")
 crack_texture_2 = ExtResource("9_mmiux")
+special_chunk = ExtResource("7_uckae")
 
 [node name="GameCamera" type="Camera2D" parent="." unique_id=982389235]
 position_smoothing_enabled = true
