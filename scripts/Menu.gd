@@ -1,9 +1,8 @@
 extends Control
-
 @onready var music = $AudioStreamPlayer
 func _ready():
 	var highScoreText = "HIGH SCORE: %d" % Global.high_score
-	var lastScoreText = "LATEST SCORE: %d" % Global.score
+	var lastScoreText = "LATEST SCORE: %d" % Global.last_score
 	$TextureRect/HighScoreLabel.text = lastScoreText + "\n" + highScoreText
 	
 func _on_play_button_pressed():

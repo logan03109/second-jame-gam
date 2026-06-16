@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://b2mi6o1ltygt5" path="res://scripts/distortion_main.gd" id="1_q4nol"]
 [ext_resource type="PackedScene" uid="uid://5bonai2y7q7y" path="res://scenes/distortion_chunk_1.tscn" id="2_ijwpt"]
 [ext_resource type="PackedScene" uid="uid://dksglog408hhv" path="res://scenes/distortion_chunk_2.tscn" id="3_kjqko"]
+[ext_resource type="PackedScene" uid="uid://k7kjauguij8p" path="res://scenes/GDRTchunk.tscn" id="4_uckae"]
 [ext_resource type="PackedScene" uid="uid://b17if56muo26m" path="res://scenes/safe_chunk.tscn" id="7_l5b4d"]
 [ext_resource type="PackedScene" uid="uid://b1gsy4053gp0f" path="res://scenes/distortion_chunk_3.tscn" id="7_uckae"]
 [ext_resource type="Texture2D" uid="uid://br255qjg547ai" path="res://assets/tile 3 cracked.png" id="8_jeans"]
@@ -17,7 +18,7 @@
 script = ExtResource("1_q4nol")
 decay_speed = 210.0
 max_zoom = 3.0
-chunk_scenes = Array[PackedScene]([ExtResource("2_ijwpt"), ExtResource("3_kjqko")])
+chunk_scenes = Array[PackedScene]([ExtResource("2_ijwpt"), ExtResource("3_kjqko"), ExtResource("4_uckae")])
 start_chunk = ExtResource("7_l5b4d")
 crack_texture = ExtResource("8_jeans")
 crack_texture_2 = ExtResource("9_mmiux")
@@ -64,6 +65,14 @@ offset_right = 40.0
 offset_bottom = 23.0
 theme_override_fonts/font = ExtResource("13_biirf")
 theme_override_font_sizes/font_size = 22
+
+[node name="StatsLabel" type="Label" parent="CanvasLayer" unique_id=1648108791]
+offset_top = 60.0
+offset_right = 40.0
+offset_bottom = 83.0
+theme_override_fonts/font = ExtResource("13_biirf")
+theme_override_font_sizes/font_size = 22
+horizontal_alignment = 1
 
 [node name="Powerup" type="Node2D" parent="." unique_id=1121058568]
 

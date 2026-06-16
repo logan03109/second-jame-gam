@@ -58,7 +58,7 @@ position = Vector2(35.5, -17.25)
 shape = SubResource("RectangleShape2D_lx8el")
 
 [node name="PowerupSpawn" type="Area2D" parent="." unique_id=1824775380]
-position = Vector2(578, -21)
+position = Vector2(577, -22)
 
-[node name="PowerupSpawn2" type="Area2D" parent="." unique_id=164117719]
+[node name="PowerupSpawn3" type="Area2D" parent="." unique_id=1431744690]
 position = Vector2(698, -137)

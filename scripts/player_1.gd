@@ -6,10 +6,13 @@ extends CharacterBody2D
 @export var down_action := "p1_down"
 @export var dash_action := "p1_dash"
 @export var device_id := 0
+@onready var sfx_dash = $SFXDash
+@onready var sfx_jump = $SFXJump
 
 @onready var sfx = $SFX
 @onready var anim = $AnimatedSprite2D
 @onready var powerup_label := $CanvasLayer/PowerupLabel
+@onready var stats_label := $CanvasLayer/StatsLabel
 
 var SPEED = 200.0
 var JUMP_VELOCITY = -300.0
@@ -35,6 +38,11 @@ const DASH_ANIM_DURATION := 0.5
 
 func _ready():
 	add_to_group("player")
+	print("player ready, Global.active_powerup = ", Global.active_powerup)
+	if Global.active_powerup != "":
+		print("reapplying powerup: ", Global.active_powerup)
+		apply_effect(Global.active_powerup, 0.0)
+
 
 func _on_landed():
 	pass
@@ -45,12 +53,17 @@ func _die():
 	get_tree().call_group("main", "_on_player_died", self)
 
 func _physics_process(delta):
-
+	Global.p1_speed = SPEED
+	Global.p1_jump = JUMP_VELOCITY
 	if global_position.y > DEATH_Y:
 		_die()
 		return
-	
-	
+	var main_node = get_tree().get_first_node_in_group("main")
+	if main_node and main_node.has_node("CanvasLayer/StatsLabel"):
+		var stats_label = main_node.get_node("CanvasLayer/StatsLabel")
+		stats_label.text = "Speed: %.0f   Jump: %.0f" % [SPEED, JUMP_VELOCITY]
+		
+		stats_label.text = "Speed: %.0f   Jump: %.0f" % [SPEED, JUMP_VELOCITY]
 	if dash_anim_timer > 0.0:
 		dash_anim_timer -= delta
 	if dash_timer > 0.0:
@@ -95,6 +108,11 @@ func _physics_process(delta):
 		dash_cooldown_timer = DASH_COOLDOWN
 		dash_anim_timer = DASH_ANIM_DURATION
 
+		# play dash sound once here, not in the dashing loop
+		sfx_dash.volume_db = 0
+		sfx_dash.stream = preload("res://assets/music and sfx/Dash.wav")
+		sfx_dash.play()
+
 		var dir := 0
 		if left: dir -= 1
 		if right: dir += 1
@@ -105,9 +123,7 @@ func _physics_process(delta):
 
 	if is_dashing:
 		anim.play("dash")
-		sfx.volume_db = 10.0
-		sfx.stream = preload("res://assets/music and sfx/Dash.wav")
-		sfx.play()
+		# removed sfx.play() and volume_db lines from here
 		velocity.x = dash_direction * DASH_SPEED
 		velocity.y = 0.0
 		if dash_timer <= 0.0:
@@ -118,8 +134,9 @@ func _physics_process(delta):
 	if jump and jump_count > 0:
 		jump_count -= 1
 		velocity.y = JUMP_VELOCITY
-		sfx.stream = preload("res://assets/music and sfx/jump.wav")
-		sfx.play()
+		sfx_jump.volume_db = -20.0
+		sfx_jump.stream = preload("res://assets/music and sfx/jump.wav")
+		sfx_jump.play()
 
 	if down and not is_on_floor():
 		velocity.y -= DOWN_VELOCITY
@@ -149,6 +166,7 @@ func _physics_process(delta):
 	move_and_slide()
 
 func apply_effect(buff: String, duration: float):
+	print("apply_effect called with: ", buff, " current SPEED: ", SPEED)
 	match buff:
 		"speed":
 			SPEED *= 1.3
@@ -157,6 +175,6 @@ func apply_effect(buff: String, duration: float):
 			get_tree().call_group("main", "show_powerup_label", "\n\n    Player 1 Acquired Powerup : SPEED BOOST ")
 		"jump":
 			JUMP_VELOCITY -= 150
-			if JUMP_VELOCITY < -1200:
+			if JUMP_VELOCITY < -900:
 				JUMP_VELOCITY = -1200
 			get_tree().call_group("main", "show_powerup_label", "\n\n    Player 1 Acquired Powerup : JUMP BOOST ")

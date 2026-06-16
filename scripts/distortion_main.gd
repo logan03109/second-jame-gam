@@ -18,7 +18,8 @@ extends Node2D
 @export var crack_offset_2 := 500.0
 @export var special_chunk: PackedScene = null
 @export var debug_force_chunk: PackedScene = null
-
+@export var score_multiplier := 3.0
+@onready var fade_rect := $CanvasLayer2/ColorRect
 @onready var timer_label := $CanvasLayer/TimerLabel
 @onready var score_label := $CanvasLayer/ScoreLabel
 @onready var camera          := $GameCamera
@@ -28,6 +29,9 @@ extends Node2D
 @onready var decay_line := $DecayLine
 @onready var powerup := $Powerup
 @onready var powerup_scene: Resource = preload("res://scenes/powerup.tscn")
+@onready var stats_label := $CanvasLayer/StatsLabel
+
+var is_fading := false
 var decay_wall_x        := -200.0
 var tile_decay          := {}
 var cached_cells        := []
@@ -48,10 +52,10 @@ var danger_chunks_spawned := 0
 const SPECIAL_CHUNK_THRESHOLD := 3
 var rate := 0.1
 var powers := ["speed", "jump", "freeze"]
+var last_player_x := 0.0
 
 func _ready():
-	Global.score = 0
-
+	print("THIS IS DISTORTION SCENE")
 	print(Input.get_connected_joypads())
 	print("test with logan for git")
 	add_to_group("main")
@@ -74,9 +78,12 @@ func _ready():
 	settings.font_color = Color(255, 255, 255, 0.8)
 	
 	timer_label.label_settings = settings
-
+	if Global.active_powerup != "" and Global.powerup_time_remaining > 0.0:
+		player1.apply_effect(Global.active_powerup, Global.powerup_time_remaining)
+	last_player_x = _get_living_player_x()
 
 func _process(delta):
+	stats_label.text = "Player 1 Speed: %.0f, Player 1 Jump: %.0f, Player 2 Speed: %.0f, Player 2 Jump: %.0f" % [Global.p1_speed, Global.p1_jump, Global.p2_speed, Global.p2_jump]
 	if not p2_joined and Input.is_action_just_pressed(join_action):
 		_join_player2()
 	if pending_spawn == "safe":
@@ -103,11 +110,15 @@ func _process(delta):
 		_spawn_chunk()
 	_apply_decay_to_tiles()
 	_update_camera()
-	
-	Global.score = _get_living_player_x() * 2.0
+	var current_x = _get_living_player_x()
+	var delta_x = current_x - last_player_x
+	if delta_x > 0:
+		Global.score += delta_x * score_multiplier
+	last_player_x = current_x
+
 
 	if _get_living_player_x() != null and is_instance_valid(score_label):
-		score_label.text = "    CURRENT SCORE: %d" % int(_get_living_player_x())
+		score_label.text = "    CURRENT SCORE: %d" % int(Global.score)
 
 	decay_line.global_position.x = decay_wall_x - 1100
 	
@@ -321,10 +332,16 @@ func _on_player_died(player):
 	if player1_dead and not p2_joined:
 		if Global.score > Global.high_score:
 			Global.high_score = Global.score
+		Global.last_score = Global.score  # ← save before reset
+		Global.score = 0
+		Global.active_powerup = ""
 		get_tree().change_scene_to_file("res://scenes/Menu.tscn")
 	if player1_dead and player2_dead:
 		if Global.score > Global.high_score:
 			Global.high_score = Global.score
+		Global.last_score = Global.score  # ← save before reset
+		Global.score = 0
+		Global.active_powerup = ""
 		get_tree().change_scene_to_file("res://scenes/Menu.tscn")
 
 func _respawn_dead_players():
@@ -382,3 +399,17 @@ func _spawn_powerups_in_chunk(chunk: Node2D):
 
 func _on_power_up_body_entered(body: Node2D) -> void:
 	pass
+
+func _fade_to_scene(path: String):
+	if is_fading:
+		return
+	is_fading = true
+	player1.set_physics_process(false)
+	if p2_joined:
+		player2.set_physics_process(false)
+	var tween = create_tween()
+	tween.tween_property(fade_rect, "color", Color(0, 0, 0, 1), 1.0)
+	tween.tween_callback(func():
+		get_tree().change_scene_to_file(path)
+	)
+	

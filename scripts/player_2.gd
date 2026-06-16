@@ -8,6 +8,7 @@ extends CharacterBody2D
 @export var device_id := 1
 @onready var sfx = $SFX
 @onready var anim = $AnimatedSprite2D
+@onready var stats_label := $CanvasLayer/StatsLabel
 
 var SPEED = 200.0
 var JUMP_VELOCITY = -300.0
@@ -33,6 +34,11 @@ const DASH_ANIM_DURATION := 0.5
 
 func _ready():
 	add_to_group("player")
+	print("player ready, Global.active_powerup = ", Global.active_powerup)
+	if Global.active_powerup != "":
+		print("reapplying powerup: ", Global.active_powerup)
+		apply_effect(Global.active_powerup, 0.0)
+
 
 func _on_landed():
 	pass
@@ -43,9 +49,17 @@ func _die():
 	get_tree().call_group("main", "_on_player_died", self)
 
 func _physics_process(delta):
+	Global.p2_speed = SPEED
+	Global.p2_jump = JUMP_VELOCITY
 	if global_position.y > DEATH_Y:
 		_die()
 		return
+	
+	var main_node = get_tree().get_first_node_in_group("main")
+	if main_node and main_node.has_node("CanvasLayer/StatsLabel"):
+		var stats_label = main_node.get_node("CanvasLayer/StatsLabel")
+		stats_label.text = "Speed: %.0f   Jump: %.0f" % [SPEED, JUMP_VELOCITY]
+		stats_label.text = "Speed: %.0f   Jump: %.0f" % [SPEED, JUMP_VELOCITY]
 	
 	if dash_anim_timer > 0.0:
 		dash_anim_timer -= delta
@@ -94,6 +108,8 @@ func _physics_process(delta):
 		if axis_x != 0:
 			dir = sign(axis_x)
 		dash_direction = dir if dir != 0 else dash_direction
+		
+		
 
 	if is_dashing:
 		anim.play("dash")
@@ -141,6 +157,7 @@ func _physics_process(delta):
 	move_and_slide()
 
 func apply_effect(buff: String, duration: float):
+	print("apply_effect called with: ", buff, " current SPEED: ", SPEED)
 	match buff:
 		"speed":
 			SPEED *= 1.3

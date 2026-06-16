@@ -26,7 +26,7 @@ extends Node2D
 @onready var powerup := $Powerup
 @onready var powerup_scene: Resource = preload("res://scenes/powerup.tscn")
 @onready var powerup_label := $CanvasLayer/PowerupLabel
-
+@onready var stats_label := $CanvasLayer/StatsLabel
 @onready var fade_rect := $CanvasLayer2/ColorRect
 
 
@@ -46,13 +46,13 @@ var safe_timer := 0.0
 var in_safe_chunk := false
 var first_safe_chunk := true
 var current_chunk: Node2D = null
+var last_player_x := 0.0
 
 var rate := 0.1
 var powers := ["speed", "jump", "freeze"]
 
 func _ready():
-	Global.score = 0
-
+	print("THIS IS MAIN SCENE")
 	print(Input.get_connected_joypads())
 	print("test with logan for git")
 	add_to_group("main")
@@ -75,10 +75,13 @@ func _ready():
 	settings.font_color = Color(255, 255, 255, 0.8)
 	
 	timer_label.label_settings = settings
+	if Global.active_powerup != "" and Global.powerup_time_remaining > 0.0:
+		player1.apply_effect(Global.active_powerup, Global.powerup_time_remaining)
+	last_player_x = _get_living_player_x()
 
 
 func _process(delta):
-	
+	stats_label.text = "Player 1 Speed: %.0f, Player 1 Jump: %.0f, Player 2 Speed: %.0f, Player 2 Jump: %.0f" % [Global.p1_speed, Global.p1_jump, Global.p2_speed, Global.p2_jump]
 	
 	if _get_living_player_x() > 10000:
 		decay_speed = 230
@@ -114,10 +117,14 @@ func _process(delta):
 	_apply_decay_to_tiles()
 	_update_camera()
 	
-	Global.score = _get_living_player_x()
+	var current_x = _get_living_player_x()
+	var delta_x = current_x - last_player_x
+	if delta_x > 0: 
+		Global.score += delta_x
+	last_player_x = current_x
 
 	if _get_living_player_x() != null and is_instance_valid(score_label):
-		score_label.text = "    CURRENT SCORE: %d" % int(_get_living_player_x())
+		score_label.text = "    CURRENT SCORE: %d" % int(Global.score)
 
 	
 	decay_line.global_position.x = decay_wall_x - 1100
@@ -323,20 +330,24 @@ var player2_dead := false
 func _on_player_died(player):
 	if player == player1:
 		player1_dead = true
-		print("player 1 died")
 	elif player == player2:
 		player2_dead = true
-		print("player 2 died")
 	if player1_dead and not p2_joined:
 		if Global.score > Global.high_score:
 			Global.high_score = Global.score
-		_fade_to_menu()
+		Global.last_score = Global.score  # ← save before reset
+		Global.score = 0
+		Global.active_powerup = ""
+		get_tree().change_scene_to_file("res://scenes/Menu.tscn")
 	if player1_dead and player2_dead:
-		print("Everyone dead")
 		if Global.score > Global.high_score:
 			Global.high_score = Global.score
-		_fade_to_menu()
-		
+		Global.last_score = Global.score  # ← save before reset
+		Global.score = 0
+		Global.active_powerup = ""
+		get_tree().change_scene_to_file("res://scenes/Menu.tscn")
+
+
 func _fade_to_menu():
 	var tween = create_tween()
 	tween.tween_property(fade_rect, "color", Color(0, 0, 0, 1), 1.5)
@@ -411,9 +422,18 @@ func show_powerup_label(text: String):
 	await get_tree().create_timer(2.0).timeout
 	powerup_label.visible = false
 	
+var is_fading := false
+
 func _fade_to_scene(path: String):
+	if is_fading:
+		return
+	is_fading = true
+	player1.set_physics_process(false)
+	if p2_joined:
+		player2.set_physics_process(false)
 	var tween = create_tween()
 	tween.tween_property(fade_rect, "color", Color(0, 0, 0, 1), 1.0)
 	tween.tween_callback(func():
 		get_tree().change_scene_to_file(path)
 	)
+	

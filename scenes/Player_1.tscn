@@ -73,5 +73,8 @@ sprite_frames = SubResource("SpriteFrames_xmx1o")
 animation = &"dash"
 frame_progress = 0.87188536
 
-[node name="SFX" type="AudioStreamPlayer" parent="." unique_id=1437318221]
-volume_db = -8.211
+[node name="SFXDash" type="AudioStreamPlayer" parent="." unique_id=1437318221]
+volume_db = -22.902
+
+[node name="SFXJump" type="AudioStreamPlayer" parent="." unique_id=1688982198]
+volume_db = -24.632
