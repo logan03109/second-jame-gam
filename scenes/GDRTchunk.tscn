@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://k7kjauguij8p"]
 
-[ext_resource type="Script" uid="uid://br4e4q32qgo37" path="res://scripts/scene_scripts/chunk_5.gd" id="1_5ivmx"]
+[ext_resource type="Script" uid="uid://bb43tt1nlu7c7" path="res://scripts/scene_scripts/gdr_tchunk.gd" id="1_5ivmx"]
 [ext_resource type="Texture2D" uid="uid://b8ei0qxkov3pa" path="res://assets/Screenshot 2026-06-04 113736.png" id="2_s0oe7"]
 [ext_resource type="Texture2D" uid="uid://bujd5gs24k1tu" path="res://assets/gd block second.png" id="3_2kqwp"]
 [ext_resource type="Texture2D" uid="uid://cmd4j5s1ga6en" path="res://assets/tile 4 decayed.png" id="4_exgqf"]

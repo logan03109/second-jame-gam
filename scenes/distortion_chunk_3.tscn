@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://rw003wb3l6jy" path="res://assets/stone tile dark.png" id="2_1n4m4"]
 [ext_resource type="Texture2D" uid="uid://ci0vubrwyojin" path="res://assets/grass stone tile.png" id="3_yf6k7"]
 [ext_resource type="Texture2D" uid="uid://h2rm05jn4hxo" path="res://assets/tile 3 decayed.png" id="4_qm216"]
-[ext_resource type="Script" uid="uid://bm0e3jbbob0av" path="res://scenes/portal_2.gd" id="5_yf6k7"]
+[ext_resource type="Script" uid="uid://bm0e3jbbob0av" path="res://scripts/portal_2.gd" id="5_yf6k7"]
 [ext_resource type="Texture2D" uid="uid://tj7rkxcbvgtc" path="res://assets/pixil-frame-0.png" id="6_qm216"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8875b"]
