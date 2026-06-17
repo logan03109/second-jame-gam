@@ -338,15 +338,14 @@ func _on_player_died(player):
 		Global.last_score = Global.score  # ← save before reset
 		Global.score = 0
 		Global.active_powerup = ""
-		get_tree().change_scene_to_file("res://scenes/Menu.tscn")
+		_fade_to_menu()
 	if player1_dead and player2_dead:
 		if Global.score > Global.high_score:
 			Global.high_score = Global.score
 		Global.last_score = Global.score  # ← save before reset
 		Global.score = 0
 		Global.active_powerup = ""
-		get_tree().change_scene_to_file("res://scenes/Menu.tscn")
-
+		_fade_to_menu()
 
 func _fade_to_menu():
 	var tween = create_tween()

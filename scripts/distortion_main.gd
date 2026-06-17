@@ -335,14 +335,22 @@ func _on_player_died(player):
 		Global.last_score = Global.score  # ← save before reset
 		Global.score = 0
 		Global.active_powerup = ""
-		get_tree().change_scene_to_file("res://scenes/Menu.tscn")
+		_fade_to_menu()
 	if player1_dead and player2_dead:
 		if Global.score > Global.high_score:
 			Global.high_score = Global.score
 		Global.last_score = Global.score  # ← save before reset
 		Global.score = 0
 		Global.active_powerup = ""
+		_fade_to_menu()
+
+func _fade_to_menu():
+	var tween = create_tween()
+	tween.tween_property(fade_rect, "color", Color(0, 0, 0, 1), 1.5)
+	tween.tween_callback(func():
 		get_tree().change_scene_to_file("res://scenes/Menu.tscn")
+	)
+
 
 func _respawn_dead_players():
 	if player1_dead and not player2_dead and p2_joined:
