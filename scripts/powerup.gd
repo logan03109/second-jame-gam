@@ -3,15 +3,7 @@ extends Area2D
 #@onready var powerup_sprite: Resource = preload("res://scenes/powerup.tscn")
 
 var rate := 0.1
-var powers := {"speed":10.0, "jump":10.0, "freeze":3.0}
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+var powers := {"speed":10.0, "jump":10.0}
 
 func _on_body_shape_entered(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int):
 	print("COLLIDE")

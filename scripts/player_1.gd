@@ -3,6 +3,7 @@ extends CharacterBody2D
 @export var left_action := "p1_left"
 @export var right_action := "p1_right"
 @export var jump_action := "p1_jump"
+@export var jump_action_2 := "p1_jump_2"
 @export var down_action := "p1_down"
 @export var dash_action := "p1_dash"
 @export var device_id := 0
@@ -80,6 +81,7 @@ func _physics_process(delta):
 	var kb_left := Input.is_action_pressed(left_action)
 	var kb_right := Input.is_action_pressed(right_action)
 	var kb_jump := Input.is_action_just_pressed(jump_action)
+	var kb_dash_2 := Input.is_action_just_pressed(jump_action_2)
 	var kb_down := Input.is_action_just_pressed(down_action)
 	var kb_dash := Input.is_action_just_pressed(dash_action)
 
@@ -100,7 +102,7 @@ func _physics_process(delta):
 	var right := kb_right or pad_right
 	var jump := kb_jump or pad_jump
 	var down := kb_down or pad_down
-	var dash := kb_dash or pad_dash
+	var dash := kb_dash or pad_dash or kb_dash_2
 
 	if dash and dash_cooldown_timer <= 0.0:
 		is_dashing = true

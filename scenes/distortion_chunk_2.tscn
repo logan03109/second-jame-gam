@@ -53,3 +53,12 @@ shape = SubResource("RectangleShape2D_iysbd")
 
 [node name="PowerupSpawn" type="Area2D" parent="." unique_id=969077147]
 position = Vector2(680, -80)
+
+[node name="PowerupSpawn2" type="Area2D" parent="." unique_id=603149546]
+position = Vector2(366, -100)
+
+[node name="PowerupSpawn3" type="Area2D" parent="." unique_id=1543929367]
+position = Vector2(898, -51)
+
+[node name="PowerupSpawn4" type="Area2D" parent="." unique_id=902820624]
+position = Vector2(477, -16)

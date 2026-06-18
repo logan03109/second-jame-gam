@@ -55,9 +55,6 @@ position = Vector2(1130, -42)
 position = Vector2(35.5, -17.25)
 shape = SubResource("RectangleShape2D_iysbd")
 
-[node name="PowerupSpawn" type="Area2D" parent="." unique_id=969077147]
-position = Vector2(523, -152)
-
 [node name="portal" type="Area2D" parent="." unique_id=2057656446]
 position = Vector2(1122, 107)
 collision_layer = 19
@@ -72,5 +69,17 @@ shape = SubResource("RectangleShape2D_4lrof")
 position = Vector2(3.5, -14.5)
 scale = Vector2(0.71, 0.84999996)
 texture = ExtResource("6_qm216")
+
+[node name="PowerupSpawn" type="Area2D" parent="." unique_id=969077147]
+position = Vector2(523, -152)
+
+[node name="PowerupSpawn2" type="Area2D" parent="." unique_id=647649240]
+position = Vector2(940, 97)
+
+[node name="PowerupSpawn3" type="Area2D" parent="." unique_id=1390909884]
+position = Vector2(437, -4)
+
+[node name="PowerupSpawn4" type="Area2D" parent="." unique_id=1412446345]
+position = Vector2(177, -16)
 
 [connection signal="body_entered" from="portal" to="portal" method="_on_body_entered"]

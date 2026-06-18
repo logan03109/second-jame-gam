@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://bwhlauoorr5en"]
+[gd_scene format=3 uid="uid://nweyn4dw4ulb"]
 
 [ext_resource type="Script" uid="uid://b2mi6o1ltygt5" path="res://scripts/distortion_main.gd" id="1_q4nol"]
 [ext_resource type="PackedScene" uid="uid://5bonai2y7q7y" path="res://scenes/distortion_chunk_1.tscn" id="2_ijwpt"]
@@ -64,15 +64,28 @@ theme_override_font_sizes/font_size = 22
 offset_right = 40.0
 offset_bottom = 23.0
 theme_override_fonts/font = ExtResource("13_biirf")
-theme_override_font_sizes/font_size = 22
+theme_override_font_sizes/font_size = 38
 
 [node name="StatsLabel" type="Label" parent="CanvasLayer" unique_id=1648108791]
-offset_top = 60.0
-offset_right = 40.0
-offset_bottom = 83.0
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 23.0
+grow_horizontal = 0
 theme_override_fonts/font = ExtResource("13_biirf")
 theme_override_font_sizes/font_size = 22
 horizontal_alignment = 1
+
+[node name="PowerupLabel" type="Label" parent="CanvasLayer" unique_id=663067016]
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("13_biirf")
+theme_override_font_sizes/font_size = 30
+text = "
+
+"
+autowrap_trim_flags = 0
 
 [node name="Powerup" type="Node2D" parent="." unique_id=1121058568]
 

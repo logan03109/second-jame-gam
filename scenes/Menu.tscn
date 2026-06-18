@@ -113,7 +113,7 @@ offset_bottom = 2011.4283
 theme_override_fonts/font = ExtResource("3_o0tnf")
 theme_override_font_sizes/font_size = 60
 text = "Player 1: left = a/left joystick left, right = d/left_joystick_right, 
-jump = w/controller_button_X, down = s/Left_bumper, dash  = f/right_bumper
+jump = w/controller_button_X, down = s/Left_bumper, dash  = f/spacebar/right_bumper
 Player 2: left = left_arrow/left joystick left, right = right_arrow/left_joystick_right,
 jump = up Arrow/controller_button_X, down = down_arrow/Left_bumper, dash  = slash/right_bumper"
 

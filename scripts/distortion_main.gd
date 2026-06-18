@@ -19,6 +19,8 @@ extends Node2D
 @export var special_chunk: PackedScene = null
 @export var debug_force_chunk: PackedScene = null
 @export var score_multiplier := 3.0
+
+@onready var powerup_label := $CanvasLayer/PowerupLabel
 @onready var fade_rect := $CanvasLayer2/ColorRect
 @onready var timer_label := $CanvasLayer/TimerLabel
 @onready var score_label := $CanvasLayer/ScoreLabel
@@ -135,6 +137,12 @@ func _process(delta):
 			decay_wall_x = _get_living_player_x() + decay_start_offset
 	else:
 			timer_label.visible = false
+
+func show_powerup_label(text: String):
+	powerup_label.text = text
+	powerup_label.visible = true
+	await get_tree().create_timer(2.0).timeout
+	powerup_label.visible = false
 
 func _spawn_specific_chunk(scene: PackedScene):
 	if scene == null:
